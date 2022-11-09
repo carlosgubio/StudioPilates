@@ -1,0 +1,52 @@
+﻿@page
+@model StudioPilates.Pages.Customer_paymentCRUD.DeleteModel
+
+@{
+    ViewData["Title"] = "Excluir Pagamento do Cliente";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<h3>Deseja realmente excluir esse registro?</h3>
+<div>
+    <h4><b>Pagamento por Cliente:</b>@Model.Customer_payment.Id_customer</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Customer_payment.Id_customer_plan)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Customer_payment.Id_customer_plan)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Customer_payment.Paid_value)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Customer_payment.Paid_value)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Customer_payment.Paid_at)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Customer_payment.Paid_at)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Customer_payment.Payment_method)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Customer_payment.Payment_method)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Customer_payment.Text)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Customer_payment.Text)
+        </dd>
+    </dl>
+
+    <form method="post">
+        <input type="hidden" asp-for="Customer_payment.Id_customer" />
+        <input type="submit" value="Excluir" class="btn btn-danger" /> |
+        <a asp-page="./Index">Voltar à Listagem</a>
+    </form>
+</div>
