@@ -7,9 +7,9 @@ namespace StudioPilates.Pages.Customer_planCRUD
 {
     public class CreateModel : PageModel
     {
-        private readonly StudioPilates.Data.ApplicationDbContext _context;
+        private readonly StudioPilates.Data.StudioPilatesContext _context;
 
-        public CreateModel(StudioPilates.Data.ApplicationDbContext context)
+        public CreateModel(StudioPilates.Data.StudioPilatesContext context)
         {
             _context = context;
         }

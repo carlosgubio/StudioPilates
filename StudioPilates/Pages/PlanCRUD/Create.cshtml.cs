@@ -8,12 +8,12 @@ namespace StudioPilates.Pages.PlanCRUD
 {
     public class CreateModel : PageModel
     {
-        private readonly ApplicationDbContext _context;
+        private readonly StudioPilatesContext _context;
 
         [BindProperty]
         public Plan Plan { get; set; }
 
-        public CreateModel(ApplicationDbContext context)
+        public CreateModel(StudioPilatesContext context)
         {
             _context = context;
         }

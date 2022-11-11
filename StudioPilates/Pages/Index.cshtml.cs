@@ -12,11 +12,11 @@ namespace StudioPilates.Pages
     {
         private readonly ILogger<IndexModel> _logger;
 
-        private readonly ApplicationDbContext _context;
+        private readonly StudioPilatesContext _context;
 
         public IList<Customer> Customers;
 
-        public IndexModel(ILogger<IndexModel> logger, ApplicationDbContext context)
+        public IndexModel(ILogger<IndexModel> logger, StudioPilatesContext context)
         {
             _logger = logger;
             _context = context;

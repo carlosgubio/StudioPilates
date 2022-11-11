@@ -2,14 +2,14 @@
 
 namespace StudioPilates.Data
 {
-    public class ApplicationDbContext : DbContext
+    public class StudioPilatesContext : DbContext
     {
-        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
+        public StudioPilatesContext(DbContextOptions<StudioPilatesContext> options)
             : base(options)
         {
         }
 
-        public DbSet<StudioPilates.Models.Customer> Customer { get; set; }
+        public DbSet<StudioPilates.Models.Customer> Customers { get; set; }
         public DbSet<StudioPilates.Models.Address> Address { get; set; }
         public DbSet<StudioPilates.Models.Customer_payment> Customer_Payments { get; set; }
         public DbSet<StudioPilates.Models.Customer_plan> Customer_plans { get; set; }

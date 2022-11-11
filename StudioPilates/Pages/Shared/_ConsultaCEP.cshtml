@@ -1,0 +1,153 @@
+﻿<!-- https://viacep.com.br/exemplo/jquery/ -->
+<script type="text/javascript">
+
+    //$(document).ready(function () {
+
+    //    function clear_zip_data() {
+    //        // Limpa valores do formulário de cep.
+    //        $("#Customer_Address_Street").val('');
+    //        $("#Customer_Address_District").val('');
+    //        $("#Customer_Address_City").val('');
+    //        $("#Customer_Address_State").val('');
+    //        $("#address").text('Digite um CEP válido e aguarde.');
+    //        //Mostra o ícone de inválido
+    //        $("#zip_code_none").removeClass("d-none");
+    //        $("#zip_code_loading").addClass("d-none");
+    //        $("#zip_code_checked").addClass("d-none");
+    //    }
+        
+    //    function consult_zip_code() {
+
+    //        //Nova variável "cep" somente com dígitos.
+    //        var zip_code = $("#Customer_Address_Zip_Code").val().replace(/\D/g, '');
+
+    //        //Verifica se campo cep possui valor informado.
+    //        if (zip_code != "") {
+
+    //            //Expressão regular para validar o CEP.
+    //            var validate_zip_code = /^[0-9]{8}$/;
+
+    //            //Valida o formato do CEP.
+    //            if (validate_zip_code.test(zip_code)) {
+
+    //                //Mostra o ícone de carregamento
+    //                $("#zip_code_none").addClass("d-none");
+    //                $("#zip_code_loading").removeClass("d-none");
+    //                $("#zip_code_checked").addClass("d-none");
+
+    //                //Consulta o webservice viacep.com.br/
+    //                $.getJSON("https://viacep.com.br/ws" + zip_code + "/json/?callback=?", function (data) {
+
+    //                    //Mostra o ícone de verificado
+    //                    $("#zip_code_none").addClass("d-none");
+    //                    $("#zip_code_loading").removeClass("d-none");
+    //                    $("#zip_code_checked").addClass("d-none");
+
+    //                    if (!("erro" in dados)) {
+    //                        //Atualiza os campos com os valores da consulta.
+    //                        $("#Customer_Address_Street").val(data.street);
+    //                        $("#Customer_Address_District").val(data.district);
+    //                        $("#Customer_Address_City").val(data.city);
+    //                        $("#Customer_Address_State").val(data.state);
+    //                        $("#address").text(data.street + ", " +
+    //                            data.district + ", " + data.city + "-" + data.state);
+    //                    } //end if.
+    //                    else {
+    //                        //CEP pesquisado não foi encontrado.
+    //                        clear_zip_data();
+    //                        showAlert("O CEP informado não retornou um endereço válido.");
+    //                    }
+    //                });
+    //            } //end if.
+    //            else {
+    //                //cep é inválido.
+    //                clear_zip_data();
+    //                showAlert("Este CEP está com o formato inválido.");
+    //            }
+    //        } //end if.
+    //        else {
+    //            //cep sem valor, limpa formulário.
+    //            clear_zip_data();
+    //        }
+    //    };
+
+    //    //Quando o campo cep perde o foco.
+    //    $("#Customer_Address_Zip_code").blur(consult_zip_code);
+    //    consult_zip_code();
+    //});
+
+    $(document).ready(function () {
+
+        function limpar_dados_cep() {
+            // Limpa valores do formulário de cep.
+            $("#Customer_Address_Street").val('');
+            $("#Customer_Address_District").val('');
+            $("#Customer_Address_City").val('');
+            $("#Customer_Address_State").val('');
+            $("#address").text('Digite um CEP válido e aguarde.');
+            //Mostra o ícone de inválido
+            $("#zip_code_none").addClass("d-none");
+            $("#zip_code_loading").removeClass("d-none");
+            $("#zip_code_checked").addClass("d-none");
+        }
+
+        function consultar_cep() {
+
+            //Nova variável "cep" somente com dígitos.
+            var cep = $("#Customer_Address_Zip_code").val().replace(/\D/g, '');
+
+            //Verifica se campo cep possui valor informado.
+            if (cep != "") {
+
+                //Expressão regular para validar o CEP.
+                var validacep = /^[0-9]{8}$/;
+
+                //Valida o formato do CEP.
+                if (validacep.test(cep)) {
+
+                    //Mostra o ícone de carregamento
+                    $("#zip_code_none").addClass("d-none");
+                    $("#zip_code_loading").removeClass("d-none");
+                    $("#zip_code_checked").addClass("d-none");
+
+                    //Consulta o webservice viacep.com.br/
+                    $.getJSON("https://viacep.com.br/ws/" + cep + "/json/?callback=?", function (dados) {
+
+                        //Mostra o ícone de verificado
+                        $("#zip_code_none").addClass("d-none");
+                        $("#zip_code_loading").addClass("d-none");
+                        $("#zip_code_checked").removeClass("d-none");
+
+                        if (!("erro" in dados)) {
+                            //Atualiza os campos com os valores da consulta.
+                            $("#Customer_Address_Street").val(dados.logradouro);
+                            $("#Customer_Address_District").val(dados.bairro);
+                            $("#Customer_Address_City").val(dados.localidade);
+                            $("#Customer_Address_State").val(dados.uf);
+                            $("#address").text(dados.logradouro + ", " +
+                                dados.bairro + ", " + dados.localidade + ", " + dados.uf);
+                        } //end if.
+                        else {
+                            //CEP pesquisado não foi encontrado.
+                            limpar_dados_cep();
+                            mostrarAlerta("O CEP informado não retornou um endereço válido.");
+                        }
+                    });
+                } //end if.
+                else {
+                    //cep é inválido.
+                    limpar_dados_cep();
+                    mostrarAlerta("Este CEP está com o formato inválido.");
+                }
+            } //end if.
+            else {
+                //cep sem valor, limpa formulário.
+                limpar_dados_cep();
+            }
+        };
+
+        //Quando o campo cep perde o foco.
+        $("#Customer_Address_Zip_code").blur(consultar_cep);
+        consultar_cep();
+    });
+</script>

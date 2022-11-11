@@ -25,7 +25,7 @@ namespace StudioPilates
         {
             services.AddRazorPages();
 
-            services.AddDbContext<ApplicationDbContext>(options =>
+            services.AddDbContext<StudioPilatesContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("ApplicationDbContext")));
         }
 

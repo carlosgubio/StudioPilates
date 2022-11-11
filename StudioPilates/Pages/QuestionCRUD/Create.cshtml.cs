@@ -8,12 +8,12 @@ namespace StudioPilates.Pages.QuestionCRUD
 {
     public class CreateModel : PageModel
     {
-        private readonly ApplicationDbContext _context;
+        private readonly StudioPilatesContext _context;
 
         [BindProperty]
         public Question Question { get; set; }
 
-        public CreateModel(ApplicationDbContext context)
+        public CreateModel(StudioPilatesContext context)
         {
             _context = context;
         }

@@ -8,7 +8,7 @@ using StudioPilates.Data;
 
 namespace StudioPilates.Migrations
 {
-    [DbContext(typeof(ApplicationDbContext))]
+    [DbContext(typeof(StudioPilatesContext))]
     partial class ApplicationDbContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
@@ -18,51 +18,6 @@ namespace StudioPilates.Migrations
                 .HasAnnotation("ProductVersion", "3.1.30")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-            modelBuilder.Entity("StudioPilates.Models.Address", b =>
-                {
-                    b.Property<int>("Id_address")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("City")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(50)")
-                        .HasMaxLength(50);
-
-                    b.Property<string>("District")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(50)")
-                        .HasMaxLength(50);
-
-                    b.Property<int>("Id_customer")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Number")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(10)")
-                        .HasMaxLength(10);
-
-                    b.Property<string>("State")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(50)")
-                        .HasMaxLength(50);
-
-                    b.Property<string>("Street")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(100)")
-                        .HasMaxLength(100);
-
-                    b.Property<string>("Zip_code")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(10)")
-                        .HasMaxLength(10);
-
-                    b.HasKey("Id_address");
-
-                    b.ToTable("Address");
-                });
 
             modelBuilder.Entity("StudioPilates.Models.Customer", b =>
                 {
@@ -99,12 +54,12 @@ namespace StudioPilates.Migrations
                         .HasColumnType("nvarchar(11)")
                         .HasMaxLength(11);
 
-                    b.Property<int>("Situation")
+                    b.Property<int>("Status")
                         .HasColumnType("int");
 
                     b.HasKey("Id_customer");
 
-                    b.ToTable("Customer");
+                    b.ToTable("Customers");
                 });
 
             modelBuilder.Entity("StudioPilates.Models.Customer_payment", b =>
@@ -218,6 +173,60 @@ namespace StudioPilates.Migrations
                     b.HasKey("Id_question");
 
                     b.ToTable("Questions");
+                });
+
+            modelBuilder.Entity("StudioPilates.Models.Customer", b =>
+                {
+                    b.OwnsOne("StudioPilates.Models.Address", "Address", b1 =>
+                        {
+                            b1.Property<int>("CustomerId_customer")
+                                .HasColumnType("int");
+
+                            b1.Property<string>("City")
+                                .IsRequired()
+                                .HasColumnType("nvarchar(50)")
+                                .HasMaxLength(50);
+
+                            b1.Property<string>("Complement")
+                                .HasColumnType("nvarchar(100)")
+                                .HasMaxLength(100);
+
+                            b1.Property<string>("District")
+                                .IsRequired()
+                                .HasColumnType("nvarchar(50)")
+                                .HasMaxLength(50);
+
+                            b1.Property<string>("Number")
+                                .IsRequired()
+                                .HasColumnType("nvarchar(10)")
+                                .HasMaxLength(10);
+
+                            b1.Property<string>("Reference")
+                                .HasColumnType("nvarchar(100)")
+                                .HasMaxLength(100);
+
+                            b1.Property<string>("State")
+                                .IsRequired()
+                                .HasColumnType("nvarchar(2)")
+                                .HasMaxLength(2);
+
+                            b1.Property<string>("Street")
+                                .IsRequired()
+                                .HasColumnType("nvarchar(100)")
+                                .HasMaxLength(100);
+
+                            b1.Property<string>("Zip_code")
+                                .IsRequired()
+                                .HasColumnType("nvarchar(8)")
+                                .HasMaxLength(8);
+
+                            b1.HasKey("CustomerId_customer");
+
+                            b1.ToTable("Address");
+
+                            b1.WithOwner()
+                                .HasForeignKey("CustomerId_customer");
+                        });
                 });
 #pragma warning restore 612, 618
         }

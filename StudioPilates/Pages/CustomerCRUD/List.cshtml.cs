@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using StudioPilates.Data;
@@ -8,11 +9,14 @@ using System.Threading.Tasks;
 
 namespace StudioPilates.Pages.CustomerCRUD
 {
+    //[Authorize(Policy = "isAdmin")]
     public class ListModel : PageModel
     {
-        private readonly ApplicationDbContext _context;
+        private readonly StudioPilatesContext _context;
 
-        public ListModel(ApplicationDbContext context)
+        //public IList<string> EmailsAdmins { get; set; }
+
+        public ListModel(StudioPilatesContext context)
         {
             _context = context;
         }
@@ -21,7 +25,7 @@ namespace StudioPilates.Pages.CustomerCRUD
 
         public async Task OnGetAsync()
         {
-            Customer = await _context.Customer.ToListAsync();
+            Customer = await _context.Customers.ToListAsync();
         }
 
         public async Task<IActionResult> OnPostDeleteAsync(int? id)
@@ -31,11 +35,11 @@ namespace StudioPilates.Pages.CustomerCRUD
                 return NotFound();
             }
 
-            var customer = await _context.Customer.FindAsync(id);
+            var customer = await _context.Customers.FindAsync(id);
 
             if(customer != null)
             {
-                _context.Customer.Remove(customer);
+                _context.Customers.Remove(customer);
                 await _context.SaveChangesAsync();
             }
             return RedirectToPage("./List");

@@ -190,3 +190,4 @@ C:\Users\carlo\source\StudioPilates\StudioPilates\obj\Debug\netcoreapp3.1\Razor\
 C:\Users\carlo\source\StudioPilates\StudioPilates\obj\Debug\netcoreapp3.1\Razor\Pages\Customer_paymentCRUD\List.cshtml.g.cs
 C:\Users\carlo\source\StudioPilates\StudioPilates\obj\Debug\netcoreapp3.1\Razor\Pages\Shared\_FrontTemplate.cshtml.g.cs
 C:\Users\carlo\source\StudioPilates\StudioPilates\obj\Debug\netcoreapp3.1\Razor\Pages\Shared\_BackTemplate.cshtml.g.cs
+C:\Users\carlo\source\StudioPilates\StudioPilates\obj\Debug\netcoreapp3.1\Razor\Pages\Shared\_ConsultaCEP.cshtml.g.cs

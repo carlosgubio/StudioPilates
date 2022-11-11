@@ -10,9 +10,9 @@ namespace StudioPilates.Pages.PlanCRUD
 {
     public class EditModel : PageModel
     {
-        private readonly ApplicationDbContext _context;
+        private readonly StudioPilatesContext _context;
 
-        public EditModel(ApplicationDbContext context)
+        public EditModel(StudioPilatesContext context)
         {
             _context = context;
         }

@@ -8,9 +8,9 @@ namespace StudioPilates.Pages.Customer_question_responseCRUD
 {
     public class DetailsModel : PageModel
     {
-        private readonly StudioPilates.Data.ApplicationDbContext _context;
+        private readonly StudioPilates.Data.StudioPilatesContext _context;
 
-        public DetailsModel(StudioPilates.Data.ApplicationDbContext context)
+        public DetailsModel(StudioPilates.Data.StudioPilatesContext context)
         {
             _context = context;
         }

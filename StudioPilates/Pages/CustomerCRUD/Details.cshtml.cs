@@ -8,9 +8,9 @@ namespace StudioPilates.Pages.CustomerCRUD
 {
     public class DetailsModel : PageModel
     {
-        private readonly StudioPilates.Data.ApplicationDbContext _context;
+        private readonly StudioPilates.Data.StudioPilatesContext _context;
 
-        public DetailsModel(StudioPilates.Data.ApplicationDbContext context)
+        public DetailsModel(StudioPilates.Data.StudioPilatesContext context)
         {
             _context = context;
         }
@@ -24,7 +24,7 @@ namespace StudioPilates.Pages.CustomerCRUD
                 return NotFound();
             }
 
-            Customer = await _context.Customer.FirstOrDefaultAsync(m => m.Id_customer == id);
+            Customer = await _context.Customers.FirstOrDefaultAsync(m => m.Id_customer == id);
 
             if (Customer == null)
             {
@@ -39,11 +39,11 @@ namespace StudioPilates.Pages.CustomerCRUD
                 return NotFound();
             }
 
-            var customer = await _context.Customer.FindAsync(id);
+            var customer = await _context.Customers.FindAsync(id);
 
             if (Customer != null)
             {
-                _context.Customer.Remove(customer);
+                _context.Customers.Remove(customer);
                 await _context.SaveChangesAsync();
             }
             return Page(); 

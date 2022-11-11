@@ -8,9 +8,9 @@ namespace StudioPilates.Pages.Customer_planCRUD
 {
     public class DeleteModel : PageModel
     {
-        private readonly StudioPilates.Data.ApplicationDbContext _context;
+        private readonly StudioPilates.Data.StudioPilatesContext _context;
 
-        public DeleteModel(StudioPilates.Data.ApplicationDbContext context)
+        public DeleteModel(StudioPilates.Data.StudioPilatesContext context)
         {
             _context = context;
         }

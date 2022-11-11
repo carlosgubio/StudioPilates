@@ -8,9 +8,9 @@ namespace StudioPilates.Pages.Customer_planCRUD
 {
     public class IndexModel : PageModel
     {
-        private readonly StudioPilates.Data.ApplicationDbContext _context;
+        private readonly StudioPilates.Data.StudioPilatesContext _context;
 
-        public IndexModel(StudioPilates.Data.ApplicationDbContext context)
+        public IndexModel(StudioPilates.Data.StudioPilatesContext context)
         {
             _context = context;
         }

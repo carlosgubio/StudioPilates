@@ -8,12 +8,12 @@ namespace StudioPilates.Pages.Customer_paymentCRUD
 {
     public class CreateModel : PageModel
     {
-        private readonly ApplicationDbContext _context;
+        private readonly StudioPilatesContext _context;
 
         [BindProperty]
         public Customer_payment Customer_payment { get; set; }
 
-        public CreateModel(ApplicationDbContext context)
+        public CreateModel(StudioPilatesContext context)
         {
             _context = context;
         }

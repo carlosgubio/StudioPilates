@@ -10,9 +10,9 @@ namespace StudioPilates.Pages.CustomerCRUD
 {
     public class EditModel : PageModel
     {
-        private readonly ApplicationDbContext _context;
+        private readonly StudioPilatesContext _context;
 
-        public EditModel(ApplicationDbContext context)
+        public EditModel(StudioPilatesContext context)
         {
             _context = context;
         }
@@ -26,7 +26,7 @@ namespace StudioPilates.Pages.CustomerCRUD
                 return NotFound();
             }
 
-            Customer = await _context.Customer.FirstOrDefaultAsync(m => m.Id_customer == id);
+            Customer = await _context.Customers.FirstOrDefaultAsync(m => m.Id_customer == id);
 
             if (Customer == null)
             {
@@ -43,6 +43,7 @@ namespace StudioPilates.Pages.CustomerCRUD
             }
 
             _context.Attach(Customer).State = EntityState.Modified;
+            _context.Attach(Customer.Address).State = EntityState.Modified;
 
             try
             {
@@ -65,7 +66,7 @@ namespace StudioPilates.Pages.CustomerCRUD
 
         private bool CustomerExists(int id)
         {
-            return _context.Customer.Any(e => e.Id_customer == id);
+            return _context.Customers.Any(e => e.Id_customer == id);
         }
     }
 }

@@ -10,9 +10,9 @@ namespace StudioPilates.Pages.PlanCRUD
 {
     public class ListModel : PageModel
     {
-        private readonly ApplicationDbContext _context;
+        private readonly StudioPilatesContext _context;
 
-        public ListModel(ApplicationDbContext context)
+        public ListModel(StudioPilatesContext context)
         {
             _context = context;
         }

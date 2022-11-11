@@ -8,9 +8,9 @@ namespace StudioPilates.Pages.CustomerCRUD
 {
     public class DeleteModel : PageModel
     {
-        private readonly StudioPilates.Data.ApplicationDbContext _context;
+        private readonly StudioPilates.Data.StudioPilatesContext _context;
 
-        public DeleteModel(StudioPilates.Data.ApplicationDbContext context)
+        public DeleteModel(StudioPilates.Data.StudioPilatesContext context)
         {
             _context = context;
         }
@@ -25,7 +25,7 @@ namespace StudioPilates.Pages.CustomerCRUD
                 return NotFound();
             }
 
-            Customer = await _context.Customer.FirstOrDefaultAsync(m => m.Id_customer == id);
+            Customer = await _context.Customers.FirstOrDefaultAsync(m => m.Id_customer == id);
 
             if (Customer == null)
             {
@@ -41,11 +41,11 @@ namespace StudioPilates.Pages.CustomerCRUD
                 return NotFound();
             }
 
-            Customer = await _context.Customer.FindAsync(id);
+            Customer = await _context.Customers.FindAsync(id);
 
             if (Customer != null)
             {
-                _context.Customer.Remove(Customer);
+                _context.Customers.Remove(Customer);
                 await _context.SaveChangesAsync();
             }
 
