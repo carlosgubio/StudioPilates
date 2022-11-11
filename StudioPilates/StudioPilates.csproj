@@ -16,6 +16,13 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Content Include="img\Carlos _Gubio.jpeg" />
+	  <Content Include="img\figuraHumano.png" />
+	  <Content Include="img\LOGO-IMC-0001.jpg" />
+	  <Content Include="img\LOGO-IMC-0002.jpg" />
+	</ItemGroup>
+
+	<ItemGroup>
 		<PackageReference Include="iTextSharp.LGPLv2.Core" Version="1.6.7" />
 		<PackageReference Include="jQuery.InputMask" Version="5.0.7" />
 		<PackageReference Include="MailKit" Version="2.8.0" />

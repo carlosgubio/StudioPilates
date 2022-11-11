@@ -1,8 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using StudioPilates.Data;
 using StudioPilates.Models;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -12,12 +15,23 @@ namespace StudioPilates.Pages.CustomerCRUD
     {
         private readonly StudioPilatesContext _context;
 
-        public EditModel(StudioPilatesContext context)
-        {
-            _context = context;
-        }
+        private readonly IWebHostEnvironment _webHostEnvironment;
+
         [BindProperty]
         public Customer Customer { get; set; }
+
+        public string PhotoPath { get; set; }
+
+        [BindProperty]
+        [Display(Name = "Foto do Cliente")]
+        [Required(ErrorMessage = "O campo \"{0}\" é de preenchimento obrigatório.")]
+        public IFormFile CustomerPhoto { get; set; }
+        public EditModel(StudioPilatesContext context, IWebHostEnvironment webHostEnvironment)
+        {
+            _context = context;
+            _webHostEnvironment = webHostEnvironment;
+            PhotoPath = "~/Photo/";
+        }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -32,9 +46,11 @@ namespace StudioPilates.Pages.CustomerCRUD
             {
                 return NotFound();
             }
+
+            PhotoPath = $"~/Photo/{Customer.Id_customer:D6}.jpeg";
+
             return Page();
         }
-
         public async Task<IActionResult> OnPostAsync()
         {
             if (!ModelState.IsValid)
@@ -48,6 +64,9 @@ namespace StudioPilates.Pages.CustomerCRUD
             try
             {
                 await _context.SaveChangesAsync();
+                //se há uma imagem de produto submetida
+                if (CustomerPhoto != null)
+                    await AppUtils.ProcessPhotoFile(Customer.Id_customer, CustomerPhoto, _webHostEnvironment);
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -60,10 +79,8 @@ namespace StudioPilates.Pages.CustomerCRUD
                     throw;
                 }
             }
-
             return RedirectToPage("./List");
         }
-
         private bool CustomerExists(int id)
         {
             return _context.Customers.Any(e => e.Id_customer == id);

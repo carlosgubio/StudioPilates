@@ -1,8 +1,11 @@
 ﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using StudioPilates.Data;
 using StudioPilates.Models;
+using System.ComponentModel.DataAnnotations;
 using System.Threading.Tasks;
 
 namespace StudioPilates.Pages.CustomerCRUD
@@ -10,68 +13,29 @@ namespace StudioPilates.Pages.CustomerCRUD
     //[Authorize(Policy = "isAdmin")]
     public class CreateModel : PageModel
     {
-        //[BindProperty]
-        //public Customer Customer { get; set; }
-
-        //private readonly ApplicationDbContext _context;   
-
-        //public CreateModel(ApplicationDbContext context)
-        //{
-        //    _context = context;
-        //}
-
-        //public IActionResult OnGet()
-        //{
-        //    return Page();
-        //}
-
-        //public async Task<IActionResult> OnPostAsync()
-        //{
-        //    var customer = new Customer();
-
-        //    //Alteração
-        //    customer.Address = new Address();
-        //    //Alteração
-
-
-        //    if (await TryUpdateModelAsync(customer, Customer.GetType(), nameof(Customer)))
-        //    //if (await TryUpdateModelAsync<Customer>(customer, "Customer", obj => obj.Name, obj=> obj.Email, obj => obj.Phone, 
-        //    //    obj => obj.Gender, obj => obj.Occupation, obj => obj.Birth_date))
-        //    {
-        //        _context.Customer.Add(customer);
-        //        await _context.SaveChangesAsync();
-        //        return RedirectToPage("./List");
-        //    }
-        //        return Page();
-        //}
-
-        //public async Task<IActionResult> OnPostAsync()
-        //{
-        //    if (!ModelState.IsValid)
-        //    {
-        //        return Page();
-        //    }
-
-        //    _context.Customer.Add(Customer);
-        //    await _context.SaveChangesAsync();
-
-        //    return RedirectToPage("./Index");
-        //}
         [BindProperty]
         public Customer Customer { get; set; }
 
         private readonly StudioPilatesContext _context;
-
-        public CreateModel(StudioPilatesContext context)
-        {
-            _context = context;
-        }
 
         public IActionResult OnGet()
         {
             return Page();
         }
 
+        private readonly IWebHostEnvironment _webHostEnvironment;
+
+        public string PhotoPath { get; set; }
+
+        [BindProperty]
+        [Display(Name = "Foto do Cliente")]
+        public IFormFile CustomerPhoto { get; set; }
+        public CreateModel(StudioPilatesContext context, IWebHostEnvironment webHostEnvironment)
+        {
+            _context = context;
+            _webHostEnvironment = webHostEnvironment;
+            PhotoPath = "~/Photo/sem_imagem.jpg";
+        }
         public async Task<IActionResult> OnPostAsync()
         {
             var customer = new Customer();
@@ -83,9 +47,14 @@ namespace StudioPilates.Pages.CustomerCRUD
             {
                 _context.Customers.Add(customer);
                 await _context.SaveChangesAsync();
+                await AppUtils.ProcessPhotoFile(customer.Id_customer,
+                    CustomerPhoto, _webHostEnvironment);
                 return RedirectToPage("./List");
             }
-
+            if (CustomerPhoto == null)
+            {
+                return Page();
+            }
             return Page();
         }
     }

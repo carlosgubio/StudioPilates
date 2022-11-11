@@ -1,21 +1,32 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
+using StudioPilates.Data;
 using StudioPilates.Models;
+using System.ComponentModel.DataAnnotations;
 using System.Threading.Tasks;
 
 namespace StudioPilates.Pages.CustomerCRUD
 {
     public class DetailsModel : PageModel
     {
-        private readonly StudioPilates.Data.StudioPilatesContext _context;
+        private readonly StudioPilatesContext _context;
 
-        public DetailsModel(StudioPilates.Data.StudioPilatesContext context)
+        private readonly IWebHostEnvironment _webHostEnvironment;
+
+        [BindProperty]
+        public Customer Customer { get; set; }
+
+        public string PhotoPath { get; set; }
+
+        public DetailsModel(StudioPilatesContext context, IWebHostEnvironment webHostEnvironment)
         {
             _context = context;
+            _webHostEnvironment = webHostEnvironment;
+            PhotoPath = "~/Photo";
         }
-
-        public Customer Customer { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -30,23 +41,10 @@ namespace StudioPilates.Pages.CustomerCRUD
             {
                 return NotFound();
             }
+
+            PhotoPath = $"~/Photo/{Customer.Id_customer:D6}.jpeg";
+
             return Page();
-        }
-        public async Task<IActionResult> OnPostDeleteAsync(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var customer = await _context.Customers.FindAsync(id);
-
-            if (Customer != null)
-            {
-                _context.Customers.Remove(customer);
-                await _context.SaveChangesAsync();
-            }
-            return Page(); 
         }
     }
 }

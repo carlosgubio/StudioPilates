@@ -37,6 +37,11 @@
                         <td>@Html.DisplayFor(modelItem => item.Occupation)</td>
                         <td class="d-none d-lg-table-cell">@Html.DisplayFor(modelItem => item.Birth_date)</td>
                         <td class="text-center">
+                            <a class="btn-primary btn-sm" asp-page="/CustomerCrud/Details" asp-route-id="@item.Id_customer" data-toggle="tooltip" title="Detalhes">
+                                <svg class="bi" width="24" height="24" fill="currentColor" id="zip_code_none">
+                                    <use xlink:href="/bi.svg#pencil-square" />
+                                </svg>
+                            </a>
                             <a class="btn-primary btn-sm" asp-page="/CustomerCrud/Edit" asp-route-id="@item.Id_customer" data-toggle="tooltip" title="Alterar">
                                 <svg class="bi" width="24" height="24" fill="currentColor" id="zip_code_none">
                                     <use xlink:href="/bi.svg#pencil-square" />
@@ -50,25 +55,25 @@
                                 </button>
                             </form>
                             @*@if (Model.EmailsAdmins.Contains(item.Email))
-                            {
-                                <form class="d-inline-block" asp-page-handler="deladmin" asp-route-id="@item.IdCliente" method="post">
-                                    <button class="btn btn-warning btn-sm p-1" type="submit" data-toggle="tooltip" title="Transformar em Usuário Comum">
-                                        <svg class="bi" width="24" height="24" fill="currentColor" id="cep_none">
-                                            <use xlink:href="/bi.svg#person" />
-                                        </svg>
-                                    </button>
-                                </form>
-                            }
-                            else
-                            {
-                                <form class="d-inline-block" asp-page-handler="setadmin" asp-route-id="@item.IdCliente" method="post">
-                                    <button class="btn btn-success btn-sm p-1" type="submit" data-toggle="tooltip" title="Transformar em Usuário Administrador">
-                                        <svg class="bi" width="24" height="24" fill="currentColor" id="cep_none">
-                                            <use xlink:href="/bi.svg#shield-lock" />
-                                        </svg>
-                                    </button>
-                                </form>
-                            }*@
+        {
+            <form class="d-inline-block" asp-page-handler="deladmin" asp-route-id="@item.IdCliente" method="post">
+                <button class="btn btn-warning btn-sm p-1" type="submit" data-toggle="tooltip" title="Transformar em Usuário Comum">
+                    <svg class="bi" width="24" height="24" fill="currentColor" id="cep_none">
+                        <use xlink:href="/bi.svg#person" />
+                    </svg>
+                </button>
+            </form>
+        }
+        else
+        {
+            <form class="d-inline-block" asp-page-handler="setadmin" asp-route-id="@item.IdCliente" method="post">
+                <button class="btn btn-success btn-sm p-1" type="submit" data-toggle="tooltip" title="Transformar em Usuário Administrador">
+                    <svg class="bi" width="24" height="24" fill="currentColor" id="cep_none">
+                        <use xlink:href="/bi.svg#shield-lock" />
+                    </svg>
+                </button>
+            </form>
+        }*@
                         </td>
                     </tr>
                 }

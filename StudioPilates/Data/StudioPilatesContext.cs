@@ -16,6 +16,7 @@ namespace StudioPilates.Data
         public DbSet<StudioPilates.Models.Customer_question_response> Customer_Question_Responses { get; set; }
         public DbSet<StudioPilates.Models.Plan> Plans { get; set; }
         public DbSet<StudioPilates.Models.Question> Questions { get; set; }
+
         //public DbSet<StudioPilates.Models.Questionnaire> Questionnaires  { get; set; }
 
 
