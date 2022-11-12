@@ -8,7 +8,48 @@
 <header class="container p-3">
     <div class="row align-items-center">
         <div class="col-sm-6"><h1>@ViewData["Title"]</h1></div>
-        <div class="col-sm-6 text-right"><a asp-page="Create" class="btn btn-info" data-toggle="tooltip" title="Cadastrar um Novo Cliente">Novo Cliente</a></div>
+
+        <div class="col-sm-6 text-right">
+            <a asp-page="Create" class="btn btn-info" data-toggle="tooltip" title="Cadastrar um Novo Cliente">Novo Cliente</a>
+            <form action="/CustomerCRUD/List" method="get" class="form-inline my-2 my-lg-0" id="searchForm">
+                <input type="text" name="searchTerm" placeholder="Buscar Cliente" class="form-control mr-sm-2" />
+                <input type="hidden" name="searchTerm" value="0" />
+                <button class="btn btn-secondary my-2 my-sm-0" type="submit">Buscar</button>
+            </form>
+        </div>
+        <div class="col-12 col-md-6">
+            <div class="d-flex flex-row-reverse justify-content-md-start justify-content-center">
+                @if (Model.Customer.Count > 1)
+                {
+                    <form class="form-inline ml-3 float-left">
+                        <select class="form-control custom-select-sm" id="selectOrder">
+                            <option value="0">Selecione a ordem de busca desejada</option>
+                            <option value="1">Ordenar por Nome</option>
+                            <option value="2">Ordenar pela Data de Nascimento</option>
+                        </select>
+                    </form>
+                }
+                @*<nav class="d-inline-block">
+                        <ul class="pagination pagination-sm my-0">
+                            @for (int i = 1; i <= Model.QuantidadePaginas; i++)
+                            {
+                                if (i == Model.PaginaAtual)
+                                {
+                                    <li class="page-item disabled">
+                                        <button class="page-link" value="@i">@i</button>
+                                    </li>
+                                }
+                                else
+                                {
+                                    <li class="page-item">
+                                        <button class="page-link" value="@i">@i</button>
+                                    </li>
+                                }
+                            }
+                        </ul>
+                    </nav>*@
+            </div>
+        </div>
     </div>
 </header>
 
@@ -38,69 +79,77 @@
                         <td class="d-none d-lg-table-cell">@Html.DisplayFor(modelItem => item.Birth_date)</td>
                         <td class="text-center">
                             <a class="btn-primary btn-sm" asp-page="/CustomerCrud/Details" asp-route-id="@item.Id_customer" data-toggle="tooltip" title="Detalhes">
-                                <svg class="bi" width="24" height="24" fill="currentColor" id="zip_code_none">
-                                    <use xlink:href="/bi.svg#pencil-square" />
-                                </svg>
+                                <svg class="bi" width="24" height="24" fill="currentColor" id="zip_code_none"></svg>
                             </a>
                             <a class="btn-primary btn-sm" asp-page="/CustomerCrud/Edit" asp-route-id="@item.Id_customer" data-toggle="tooltip" title="Alterar">
-                                <svg class="bi" width="24" height="24" fill="currentColor" id="zip_code_none">
-                                    <use xlink:href="/bi.svg#pencil-square" />
-                                </svg>
+                                <svg class="bi" width="24" height="24" fill="currentColor" id="zip_code_none"></svg>
                             </a>
                             <form class="d-inline-block" asp-page-handler="delete" asp-route-id="@item.Id_customer" method="post">
                                 <button class="btn btn-danger btn-sm" onclick="confirmarExclusao(this);" type="button" data-toggle="tooltip" title="Excluir">
-                                    <svg class="bi" width="24" height="24" fill="currentColor" id="zip_code_none">
-                                        <use xlink:href="/bi.svg#trash" />
-                                    </svg>
+                                    <svg class="bi" width="24" height="24" fill="currentColor" id="zip_code_none"></svg>
                                 </button>
                             </form>
-                            @*@if (Model.EmailsAdmins.Contains(item.Email))
-        {
-            <form class="d-inline-block" asp-page-handler="deladmin" asp-route-id="@item.IdCliente" method="post">
-                <button class="btn btn-warning btn-sm p-1" type="submit" data-toggle="tooltip" title="Transformar em Usuário Comum">
-                    <svg class="bi" width="24" height="24" fill="currentColor" id="cep_none">
-                        <use xlink:href="/bi.svg#person" />
-                    </svg>
-                </button>
-            </form>
-        }
-        else
-        {
-            <form class="d-inline-block" asp-page-handler="setadmin" asp-route-id="@item.IdCliente" method="post">
-                <button class="btn btn-success btn-sm p-1" type="submit" data-toggle="tooltip" title="Transformar em Usuário Administrador">
-                    <svg class="bi" width="24" height="24" fill="currentColor" id="cep_none">
-                        <use xlink:href="/bi.svg#shield-lock" />
-                    </svg>
-                </button>
-            </form>
-        }*@
                         </td>
                     </tr>
                 }
             </tbody>
+
         </table>
     }
     else
     {
-        <h2>Não há cliente cadastrado.</h2>
+        if (Request.QueryString.HasValue)
+        {
+            <div class="col-12">
+                <h2>Sua busca por <b>@Request.Query["searchTerm"]</b>não obteve resultados.</h2>
+            </div>
+        }
+        else
+        {<div class="col-12">
+                <h2>Não há Cliente cadastrado.</h2>
+            </div>
+
+        }
     }
 </main>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_CustomConfirm");}
+    <script>
+        function getUrlVars() {
+            var vars = [], hash;
+            var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+            for (var i = 0; i < hashes.length; i++) {
+                hash = hashes[i].split('=');
+                vars.push(hash[0]);
+                vars[hash[0]] = hash[1];
+            }
+            return vars;
+        }
+        $(document).ready(function () {
+            var qs = getUrlVars();
+            if (qs["o"] != null) {
+                $("#selectOrder").val(qs["o"]);
+                $("#o").val(qs["o"]);
+            }
+            //} else {
+            //    $("#selectOrder").val("1");
+            //    $("#o").val("1");
+            //}
+            //if (qs["q"] != null) {
+            //    $("#q").val(decodeURI(qs["q"]));
+            //}
+        });
+
+        $("#selectOrder").change(function () {
+            $("#o").val($(this).val());
+            $("#searchForm").submit();
+        });
+
+        //$("#page-link").click(function () {
+        //    $("#p").val($(this).val());
+        //    $("#searchForm").submit();
+        //});
+    </script>
 }
+   
 
-
-@*@section Scripts {
-        <script>
-            $(document).ready(function () {
-                $("#Phone").inputmask("mask", { "mask": "(99) 9999-99999" });
-                $("#cpf").inputmask("mask", { "mask": "999.999.999-99" }, { reverse: true });
-                $("#cep").inputmask("mask", { "mask": "99999-999" });
-                $("#nascimento").inputmask("mask", { "mask": "99/99/9999" });
-                $("#preco").inputmask("mask", { "mask": "999.999,99" }, { reverse: true });
-                $("#valor").inputmask("mask", { "mask": "#.##9,99" }, { reverse: true });
-                $("#ip").inputmask("mask", { "mask": "999.999.999.999" });
-            });
-        </script>
-    }*@

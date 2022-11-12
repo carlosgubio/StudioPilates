@@ -40,7 +40,7 @@ namespace StudioPilates.Pages.CustomerCRUD
                 return NotFound();
             }
 
-            Customer = await _context.Customers.FirstOrDefaultAsync(m => m.Id_customer == id);
+            Customer = await _context.Customers.FirstOrDefaultAsync(c => c.Id_customer == id);
 
             if (Customer == null)
             {

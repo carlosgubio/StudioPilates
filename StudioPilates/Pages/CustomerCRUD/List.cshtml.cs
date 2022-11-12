@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using StudioPilates.Data;
 using StudioPilates.Models;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace StudioPilates.Pages.CustomerCRUD
@@ -23,9 +24,27 @@ namespace StudioPilates.Pages.CustomerCRUD
 
         public IList<Customer> Customer { get; set; }
 
-        public async Task OnGetAsync()
+        public async Task OnGetAsync([FromQuery(Name = "q")] string searchTerm, [FromQuery(Name = "o")] int? order = 1)
         {
-            Customer = await _context.Customers.ToListAsync();
+            var query = _context.Customers.AsQueryable();
+
+            if (!string.IsNullOrEmpty(searchTerm))
+            {
+                query = query.Where(c => c.Name.ToLower().Contains(searchTerm.ToLower()));
+            }
+            if (order.HasValue)
+            {
+                switch (order.Value)
+                {
+                    case 1:
+                        query = query.OrderBy(c => c.Name.ToLower());
+                        break;
+                    case 2:
+                        query = query.OrderBy(c => c.Birth_date);
+                        break;
+                }
+            }
+            Customer = await query.ToListAsync();
         }
 
         public async Task<IActionResult> OnPostDeleteAsync(int? id)
