@@ -1,10 +1,14 @@
 ﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using StudioPilates.Data;
 using StudioPilates.Models;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -13,14 +17,20 @@ namespace StudioPilates.Pages.CustomerCRUD
     //[Authorize(Policy = "isAdmin")]
     public class ListModel : PageModel
     {
+        private readonly ILogger<ListModel> _logger;
         private readonly StudioPilatesContext _context;
+        private readonly IWebHostEnvironment _webHostEnvironment;
+        private readonly UserManager<AppUser> _userManager;
 
         //public IList<string> EmailsAdmins { get; set; }
 
-        public ListModel(StudioPilatesContext context)
+        public ListModel(ILogger<ListModel> logger, StudioPilatesContext context, IWebHostEnvironment webHostEnvironment)
         {
+            _logger = logger;
             _context = context;
+            _webHostEnvironment = webHostEnvironment;
         }
+
 
         public IList<Customer> Customer { get; set; }
 
@@ -44,6 +54,8 @@ namespace StudioPilates.Pages.CustomerCRUD
                         break;
                 }
             }
+            var queryCount = query;
+
             Customer = await query.ToListAsync();
         }
 
@@ -58,8 +70,24 @@ namespace StudioPilates.Pages.CustomerCRUD
 
             if(customer != null)
             {
+                //AppUser user = await _userManager.FindByNameAsync(customer.Email);
+                //if (user != null)
+                //{
+                //    await _userManager.RemoveFromRoleAsync(user, "admin");
+                //}
                 _context.Customers.Remove(customer);
-                await _context.SaveChangesAsync();
+                if(await _context.SaveChangesAsync() > 0)
+                {
+                    var photoFilePath = Path.Combine(
+                        _webHostEnvironment.WebRootPath, 
+                        "Photo",
+                        customer.Id_customer.ToString("D6") + ".Jpeg");
+                    if (System.IO.File.Exists(photoFilePath))
+                    {
+                        System.IO.File.Delete(photoFilePath);
+                    }
+                }
+
             }
             return RedirectToPage("./List");
         }

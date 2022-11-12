@@ -13,6 +13,7 @@ namespace StudioPilates.Models
         public string Name { get; set; }
 
         [Required(ErrorMessage = "O campo {0} é de preenchimento obrigatório.")]
+        //[DataType(DataType.Currency)] ** Reconhecer como valor monetário **
         [Display(Name = "Valor")]
         public int Price { get; set; }
 

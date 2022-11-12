@@ -2,7 +2,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
 
 <script>
-    function confirmarExclusao(el) {
+    function confirmDelection(el) {
         $.confirm({
             title: 'Confirmação',
             content: 'Deseja realmente excluir?',
@@ -32,26 +32,26 @@
         });
     }
 
-    function confirmarCancelamento(el) {
-        $.confirm({
-            title: 'Confirmação',
-            content: 'Deseja realmente cancelar este pedido?',
-            buttons: {
-                cancel: {
-                    text: "Não",
-                    btnClass: "btn-primary",
-                    action: function () {
-                        $.alert('Cancelamento não realizado.');
-                    }
-                },
-                confirm: {
-                    text: "Sim",
-                    btnClass: "btn-danger",
-                    action: function () {
-                        el.form.submit();
-                    }
-                }
-            }
-        });
-    }    
+    //function confirmarCancelamento(el) {
+    //    $.confirm({
+    //        title: 'Confirmação',
+    //        content: 'Deseja realmente cancelar este pedido?',
+    //        buttons: {
+    //            cancel: {
+    //                text: "Não",
+    //                btnClass: "btn-primary",
+    //                action: function () {
+    //                    $.alert('Cancelamento não realizado.');
+    //                }
+    //            },
+    //            confirm: {
+    //                text: "Sim",
+    //                btnClass: "btn-danger",
+    //                action: function () {
+    //                    el.form.submit();
+    //                }
+    //            }
+    //        }
+    //    });
+    //}    
 </script>
