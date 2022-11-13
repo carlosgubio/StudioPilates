@@ -17,12 +17,12 @@ namespace StudioPilates.Models
 
         [Required(ErrorMessage = "O campo \"{0}\" é de preenchimento obrigatório.")]
         [MaxLength(200, ErrorMessage = "O campo \"{0}\" deve ter no máximo \"{1}\" caracteres.")]
-        [Display(Name = "Nome")]
+        [Display(Name = "Nome: ")]
         public string Name { get; set; }
 
         [Required(ErrorMessage = "O campo \"{0}\" é de preenchimento obrigatório.")]
         [MaxLength(50)]
-        [Display(Name = "E-mail")]
+        [Display(Name = "E-mail: ")]
         [EmailAddress(ErrorMessage = "O campo \"{0}\" deve conter um endereço de e-mail válido.")]
         public string Email { get; set; }
 
@@ -31,26 +31,26 @@ namespace StudioPilates.Models
         [MaxLength(11, ErrorMessage = "O campo \"{0}\" deve conter no máximo \"{1}\" caracteres.")]
         [MinLength(11, ErrorMessage = "O campo \"{0}\" deve conter no mínimo \"{1}\" caracteres.")]
         [UIHint("_PhoneTemplate")]
-        [Display(Name = "Telefone")]
+        [Display(Name = "Telefone: ")]
         public string Phone { get; set; }
 
         [Required(ErrorMessage = "O campo \"{0}\" é de preenchimento obrigatório.")]
         [MaxLength(1)]
-        [Display(Name = "Gênero")]
+        [Display(Name = "Gênero: ")]
         public string Gender { get; set; }
 
         [Required(ErrorMessage = "O campo \"{0}\" é de preenchimento obrigatório.")]
         [MaxLength(50)]
-        [Display(Name = "Ocupação")]
+        [Display(Name = "Ocupação: ")]
         public string Occupation { get; set; }
 
         [DataType(DataType.Date, ErrorMessage = "O campo \"{0}\" deve conter uma data válida.")]
         [Required(ErrorMessage = "O campo \"{0}\" é de preenchimento obrigatório.")]
-        [Display(Name = "Data de Nascimento")]
+        [Display(Name = "Data de Nascimento: ")]
         public DateTime Birth_date { get; set; }
 
         [Required(ErrorMessage = "O campo \"{0}\" é de preenchimento obrigatório.")]
-        [Display(Name = "Status")]
+        [Display(Name = "Status: ")]
         public CustomerStatus Status { get; set; }
 
         public Address Address { get; set; }
