@@ -149,10 +149,8 @@ C:\Users\carlo\source\StudioPilates\StudioPilates\obj\Debug\netcoreapp3.1\Razor\
 C:\Users\carlo\source\StudioPilates\StudioPilates\obj\Debug\netcoreapp3.1\Razor\Pages\Customer_planCRUD\Edit.cshtml.g.cs
 C:\Users\carlo\source\StudioPilates\StudioPilates\obj\Debug\netcoreapp3.1\Razor\Pages\Customer_planCRUD\Index.cshtml.g.cs
 C:\Users\carlo\source\StudioPilates\StudioPilates\obj\Debug\netcoreapp3.1\Razor\Pages\Customer_question_responseCRUD\Create.cshtml.g.cs
-C:\Users\carlo\source\StudioPilates\StudioPilates\obj\Debug\netcoreapp3.1\Razor\Pages\Customer_question_responseCRUD\Delete.cshtml.g.cs
 C:\Users\carlo\source\StudioPilates\StudioPilates\obj\Debug\netcoreapp3.1\Razor\Pages\Customer_question_responseCRUD\Details.cshtml.g.cs
 C:\Users\carlo\source\StudioPilates\StudioPilates\obj\Debug\netcoreapp3.1\Razor\Pages\Customer_question_responseCRUD\Edit.cshtml.g.cs
-C:\Users\carlo\source\StudioPilates\StudioPilates\obj\Debug\netcoreapp3.1\Razor\Pages\Customer_question_responseCRUD\Index.cshtml.g.cs
 C:\Users\carlo\source\StudioPilates\StudioPilates\obj\Debug\netcoreapp3.1\Razor\Pages\PlanCRUD\Create.cshtml.g.cs
 C:\Users\carlo\source\StudioPilates\StudioPilates\obj\Debug\netcoreapp3.1\Razor\Pages\PlanCRUD\Edit.cshtml.g.cs
 C:\Users\carlo\source\StudioPilates\StudioPilates\obj\Debug\netcoreapp3.1\Razor\Pages\QuestionCRUD\Create.cshtml.g.cs
@@ -205,3 +203,4 @@ C:\Users\carlo\source\StudioPilates\StudioPilates\obj\Debug\netcoreapp3.1\Razor\
 C:\Users\carlo\source\StudioPilates\StudioPilates\obj\Debug\netcoreapp3.1\Razor\Pages\Customer_question_responseCRUD\_ViewStart.cshtml.g.cs
 C:\Users\carlo\source\StudioPilates\StudioPilates\obj\Debug\netcoreapp3.1\Razor\Pages\QuestionCRUD\_ViewStart.cshtml.g.cs
 C:\Users\carlo\source\StudioPilates\StudioPilates\obj\Debug\netcoreapp3.1\Razor\Pages\Contact.cshtml.g.cs
+C:\Users\carlo\source\StudioPilates\StudioPilates\obj\Debug\netcoreapp3.1\Razor\Pages\Customer_question_responseCRUD\List.cshtml.g.cs

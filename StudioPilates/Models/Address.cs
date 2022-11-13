@@ -2,59 +2,6 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-//Alteração
-//namespace StudioPilates.Models
-//{
-
-//    //[Owned]
-//    public class Address
-//    {
-//        [Key]
-//        public int Id_address { get; set; }
-
-//        [ForeignKey("Id_customer")]
-//        public int Id_customer { get; set; }
-
-//        //[ForeignKey("Id_customer")]
-//        //public Customer Customer { get; }
-
-//        [Required(ErrorMessage = "O campo{0} é de preenchimento obrigatório.")]
-//        [MaxLength(10)]
-//        public string Zip_code { get; set; }
-
-//        [Required(ErrorMessage = "O campo{0} é de preenchimento obrigatório.")]
-//        [MaxLength(50)]
-//        public string City { get; set; }
-
-//        [Required(ErrorMessage = "O campo{0} é de preenchimento obrigatório.")]
-//        [MaxLength(50)]
-//        public string State { get; set; }
-
-//        [Required(ErrorMessage = "O campo{0} é de preenchimento obrigatório.")]
-//        [MaxLength(50)]
-//        public string District { get; set; }
-
-//        [Required(ErrorMessage = "O campo{0} é de preenchimento obrigatório.")]
-//        [MaxLength(100)]
-//        public string Street { get; set; }
-
-//        [Required(ErrorMessage = "O campo{0} é de preenchimento obrigatório.")]
-//        [MaxLength(10)]
-//        public string Number { get; set; }
-
-//        [Required(ErrorMessage = "O campo{0} é de preenchimento obrigatório.")]
-//        [MaxLength(100)]
-//        public string Complement { get; set; }
-
-//        [Required(ErrorMessage = "O campo{0} é de preenchimento obrigatório.")]
-//        [MaxLength(100)]
-//        public string Reference { get; set; }
-//    }
-//}
-//Alteração
-
-
-
 namespace StudioPilates.Models
 {
     [Owned]
@@ -62,6 +9,7 @@ namespace StudioPilates.Models
     {
         [Required(ErrorMessage = "O CEP informado não retornou um endereço válido.")]
         [MaxLength(100, ErrorMessage = "O campo {0} deve conter no máximo {1} caracteres.")]
+        [Display(Name = "Logradouro")]
         public string Street { get; set; }
 
         [Required(ErrorMessage = "O campo \"{0}\" é de preenchimento obrigatório.")]
@@ -75,14 +23,17 @@ namespace StudioPilates.Models
 
         [Required(ErrorMessage = "O campo \"{0}\" é de preenchimento obrigatório.")]
         [MaxLength(50, ErrorMessage = "O campo \"{0}\" deve conter no máximo {1} caracteres.")]
+        [Display(Name = "Bairro")]
         public string District { get; set; }
 
         [Required(ErrorMessage = "O campo \"{0}\" é de preenchimento obrigatório.")]
         [MaxLength(50, ErrorMessage = "O campo \"{0}\" deve conter no máximo {1} caracteres.")]
+        [Display(Name = "Cidade")]
         public string City { get; set; }
 
         [Required(ErrorMessage = "O campo \"{0}\" é de preenchimento obrigatório.")]
         [MaxLength(2, ErrorMessage = "O campo \"{0}\" deve conter no máximo {1} caracteres.")]
+        [Display(Name = "Estado")]
         public string State { get; set; }
 
         [Required(ErrorMessage = "O campo \"{0}\" é de preenchimento obrigatório.")]

@@ -1,5 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.EntityFrameworkCore;
+using StudioPilates.Data;
 using StudioPilates.Models;
 using System.Threading.Tasks;
 
@@ -7,25 +10,43 @@ namespace StudioPilates.Pages.Customer_question_responseCRUD
 {
     public class CreateModel : PageModel
     {
-        private readonly StudioPilates.Data.StudioPilatesContext _context;
+        private readonly StudioPilatesContext _context;
 
-        public CreateModel(StudioPilates.Data.StudioPilatesContext context)
-        {
-            _context = context;
-        }
+        private readonly IWebHostEnvironment _webHostEnvironment;
 
-        public IActionResult OnGet()
-        {
-            return Page();
-        }
+        public Customer Customer { get; set; }
+        public string PhotoPath { get; set; }
 
         [BindProperty]
         public Customer_question_response Customer_question_response { get; set; }
 
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for
-        // more details, see https://aka.ms/RazorPagesCRUD.
-        public async Task<IActionResult> OnPostAsync()
+        public CreateModel(StudioPilatesContext context, IWebHostEnvironment webHostEnvironment)
         {
+            _context = context;
+            _webHostEnvironment = webHostEnvironment;
+            PhotoPath = "~/Photo";
+        }
+
+        public async Task<IActionResult> OnGetAsync(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            Customer = await _context.Customers.FirstOrDefaultAsync(m => m.Id_customer == id);
+
+            if (Customer == null)
+            {
+                return NotFound();
+            }
+
+            PhotoPath = $"~/Photo/{Customer.Id_customer:D6}.jpeg";
+
+            return Page();
+        }
+            public async Task<IActionResult> OnPostAsync()
+            {
             if (!ModelState.IsValid)
             {
                 return Page();
@@ -34,7 +55,7 @@ namespace StudioPilates.Pages.Customer_question_responseCRUD
             _context.Customer_Question_Responses.Add(Customer_question_response);
             await _context.SaveChangesAsync();
 
-            return RedirectToPage("./Index");
+            return RedirectToPage("./List");
         }
     }
 }
