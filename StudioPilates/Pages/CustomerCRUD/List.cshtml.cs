@@ -20,7 +20,7 @@ namespace StudioPilates.Pages.CustomerCRUD
         private readonly ILogger<ListModel> _logger;
         private readonly StudioPilatesContext _context;
         private readonly IWebHostEnvironment _webHostEnvironment;
-        private readonly UserManager<AppUser> _userManager;
+        //private readonly UserManager<AppUser> _userManager;
 
         //public IList<string> EmailsAdmins { get; set; }
 
