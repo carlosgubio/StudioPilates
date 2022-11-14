@@ -80,18 +80,13 @@
                         <div class="form-group">
                             <label asp-for="Customer.Address.Complement" class="control-label"></label>
                             <input asp-for="Customer.Address.Complement" class="form-control col-4" />
-                            <span asp-validation-for="Customer.Address.Complement" class="text-danger"></span>
-                        </div>
-                        <div class="form-group">
-                            <label asp-for="Customer.Address.Complement" class="control-label"></label>
-                            <input asp-for="Customer.Address.Complement" class="form-control col-4" />
                             <span asp-validation-for="Customer.Address.Reference" class="text-danger"></span>
                         </div>
                     </fieldset>
                     <fieldset>
                         <legend>Senha de Acesso</legend>
                         <div class="form-group">
-                            <label asp-for="Customer.Address.Reference" class="control-label"></label>
+                            <label asp-for="UserPassword.Password" class="control-label"></label>
                             <input asp-for="UserPassword.Password" class="form-control col-6 col-lg-5" autocomplete="off" />
                             <span asp-validation-for="UserPassword.Password" class="text-danger"></span>
                         </div>
