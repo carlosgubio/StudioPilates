@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using StudioPilates.Data;
 using StudioPilates.Models;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -17,12 +18,16 @@ namespace StudioPilates.Pages.CustomerCRUD
     //[Authorize(Policy = "isAdmin")]
     public class ListModel : PageModel
     {
+        private const int pageSize = 12;
         private readonly ILogger<ListModel> _logger;
         private readonly StudioPilatesContext _context;
         private readonly IWebHostEnvironment _webHostEnvironment;
+
         //private readonly UserManager<AppUser> _userManager;
 
         //public IList<string> EmailsAdmins { get; set; }
+        public int CurrentPage { get; set; }
+        public int NumberPages { get; set; }
 
         public ListModel(ILogger<ListModel> logger, StudioPilatesContext context, IWebHostEnvironment webHostEnvironment)
         {
@@ -34,8 +39,10 @@ namespace StudioPilates.Pages.CustomerCRUD
 
         public IList<Customer> Customer { get; set; }
 
-        public async Task OnGetAsync([FromQuery(Name = "q")] string searchTerm, [FromQuery(Name = "o")] int? order = 1)
+        public async Task OnGetAsync([FromQuery(Name = "q")] string searchTerm, [FromQuery(Name = "o")] int? order = 1, [FromQuery(Name = "p")] int? page = 1)
         {
+            this.CurrentPage = page.Value;
+
             var query = _context.Customers.AsQueryable();
 
             if (!string.IsNullOrEmpty(searchTerm))
@@ -55,6 +62,9 @@ namespace StudioPilates.Pages.CustomerCRUD
                 }
             }
             var queryCount = query;
+            int customerQuantity = queryCount.Count();
+            this.NumberPages = Convert.ToInt32(Math.Ceiling(customerQuantity*1M / pageSize));
+            query = query.Skip(pageSize * (this.CurrentPage - 1)).Take(pageSize);
 
             Customer = await query.ToListAsync();
         }
