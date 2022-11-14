@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using StudioPilates.Data;
@@ -8,6 +9,7 @@ using System.Threading.Tasks;
 
 namespace StudioPilates.Pages.QuestionCRUD
 {
+    //[Authorize(Policy = "isAdmin")]
     public class ListModel : PageModel
     {
         private readonly StudioPilatesContext _context;

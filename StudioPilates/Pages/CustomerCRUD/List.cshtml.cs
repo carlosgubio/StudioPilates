@@ -19,25 +19,33 @@ namespace StudioPilates.Pages.CustomerCRUD
     public class ListModel : PageModel
     {
         private const int pageSize = 12;
-        private readonly ILogger<ListModel> _logger;
+        //private readonly ILogger<ListModel> _logger;
         private readonly StudioPilatesContext _context;
         private readonly IWebHostEnvironment _webHostEnvironment;
+        private readonly UserManager<AppUser> _userManager;
+        private readonly RoleManager<IdentityRole> _roleManager;
 
-        //private readonly UserManager<AppUser> _userManager;
 
         public IList<string> EmailsAdmins { get; set; }
         public int CurrentPage { get; set; }
         public int NumberPages { get; set; }
 
-        public ListModel(ILogger<ListModel> logger, StudioPilatesContext context, IWebHostEnvironment webHostEnvironment)
+        public ListModel(StudioPilatesContext context,
+             UserManager<AppUser> userManager, RoleManager<IdentityRole> roleManager, IWebHostEnvironment webHostEnvironment)
         {
-            _logger = logger;
-            _context = context;
-            _webHostEnvironment = webHostEnvironment;
+            this._context = context;
+            this._userManager = userManager;
+            this._roleManager = roleManager;
+            this._webHostEnvironment = webHostEnvironment;
         }
 
-
         public IList<Customer> Customer { get; set; }
+
+        public async Task OnGetAsync()
+        {
+            EmailsAdmins = (await _userManager.GetUsersInRoleAsync("admin")).Select(x => x.Email).ToList();
+            Customer = await _context.Customers.ToListAsync();
+        }
 
         public async Task OnGetAsync([FromQuery(Name = "q")] string searchTerm, [FromQuery(Name = "o")] int? order = 1, [FromQuery(Name = "p")] int? page = 1)
         {
@@ -80,11 +88,6 @@ namespace StudioPilates.Pages.CustomerCRUD
 
             if(customer != null)
             {
-                //AppUser user = await _userManager.FindByNameAsync(customer.Email);
-                //if (user != null)
-                //{
-                //    await _userManager.RemoveFromRoleAsync(user, "admin");
-                //}
                 _context.Customers.Remove(customer);
                 if(await _context.SaveChangesAsync() > 0)
                 {
@@ -99,6 +102,50 @@ namespace StudioPilates.Pages.CustomerCRUD
                 }
 
             }
+            return RedirectToPage("./List");
+        }
+        public async Task<IActionResult> OnPostDelAdminAsync(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var customer = await _context.Customers.FindAsync(id);
+
+            if (customer != null)
+            {
+                AppUser user = await _userManager.FindByNameAsync(customer.Email);
+                if (user != null)
+                {
+                    await _userManager.RemoveFromRoleAsync(user, "admin");
+                }
+            }
+
+            return RedirectToPage("./List");
+        }
+
+        public async Task<IActionResult> OnPostSetAdminAsync(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var customer = await _context.Customers.FindAsync(id);
+
+            if (customer != null)
+            {
+                AppUser user = await _userManager.FindByNameAsync(customer.Email);
+                if (user != null)
+                {
+                    if (!await _roleManager.RoleExistsAsync("admin"))
+                        await _roleManager.CreateAsync(new IdentityRole("admin"));
+
+                    await _userManager.AddToRoleAsync(user, "admin");
+                }
+            }
+
             return RedirectToPage("./List");
         }
     }

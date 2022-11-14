@@ -1,11 +1,17 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using StudioPilates.Data;
+using StudioPilates.Entities;
+using StudioPilates.Models;
+using StudioPilates.Services;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 
@@ -23,10 +29,61 @@ namespace StudioPilates
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddRazorPages();
+            services.Configure<CookiePolicyOptions>(options =>
+            {
+                // habilita a necessidade de consentimento para uso de cookie
+                options.CheckConsentNeeded = context => true;
+                // adicionar using Microsoft.AspNetCore.Http;
+                options.MinimumSameSitePolicy = SameSiteMode.None;
+            });
+
+            services.AddIdentity<AppUser, IdentityRole>(options =>
+            {
+                options.User.RequireUniqueEmail = true; //default = false
+                options.Password.RequireNonAlphanumeric = false; //default = true
+                options.Password.RequireUppercase = false; //default = true
+                options.Password.RequireLowercase = false; //default = true               
+                options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(3); //default = 3
+                options.Lockout.MaxFailedAccessAttempts = 3; //default = 5
+                options.SignIn.RequireConfirmedAccount = false; //default = false
+                options.SignIn.RequireConfirmedEmail = true; //default = false
+                options.SignIn.RequireConfirmedPhoneNumber = false; //default = false                
+            }).AddEntityFrameworkStores<StudioPilatesContext>()
+              .AddDefaultTokenProviders();
+
+            services.ConfigureApplicationCookie(options =>
+            {
+                options.Cookie.HttpOnly = true;
+                options.ExpireTimeSpan = TimeSpan.FromMinutes(5);
+                options.LoginPath = "/Login";
+                options.AccessDeniedPath = "/Login";
+                options.SlidingExpiration = true;
+            });
+
+            services.AddAuthorization(options =>
+            {
+                //adiciona uma política de acesso chamada isAdmin
+                options.AddPolicy("isAdmin", policy =>
+                    policy.RequireRole("admin"));
+            });
+
+            services.AddRazorPages(options =>
+            {
+                options.Conventions.AuthorizePage("/Admin", "isAdmin");
+                options.Conventions.AuthorizeFolder("/CustomerCRUD", "isAdmin");
+            }).AddCookieTempDataProvider(options =>
+            {
+                options.Cookie.IsEssential = true;
+            });
+
+            services.AddMvc();
 
             services.AddDbContext<StudioPilatesContext>(options =>
-                    options.UseSqlServer(Configuration.GetConnectionString("ApplicationDbContext")));
+                    options.UseSqlServer(Configuration.GetConnectionString("StudioPilatesContext")));
+
+            services.Configure<EmailConfiguration>(Configuration.GetSection("EmailConfiguration"));
+            //services.AddSingleton<IEmailSender, EmailSender>();
+            services.AddSingleton<IEmailSender, SendGridSender>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

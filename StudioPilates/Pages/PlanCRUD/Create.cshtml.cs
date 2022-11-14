@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using StudioPilates.Data;
 using StudioPilates.Models;
@@ -6,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace StudioPilates.Pages.PlanCRUD
 {
+    //[Authorize(Policy = "isAdmin")]
     public class CreateModel : PageModel
     {
         private readonly StudioPilatesContext _context;
