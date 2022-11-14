@@ -472,3 +472,4 @@ C:\Users\carlo\source\StudioPilates\StudioPilates\bin\Debug\netcoreapp3.1\Micros
 C:\Users\carlo\source\StudioPilates\StudioPilates\bin\Debug\netcoreapp3.1\System.Text.Encodings.Web.dll
 C:\Users\carlo\source\StudioPilates\StudioPilates\bin\Debug\netcoreapp3.1\System.Text.Json.dll
 C:\Users\carlo\source\StudioPilates\StudioPilates\obj\Debug\netcoreapp3.1\StudioPilates.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\carlo\source\StudioPilates\StudioPilates\obj\Debug\netcoreapp3.1\Razor\Pages\Shared\Login.cshtml.g.cs

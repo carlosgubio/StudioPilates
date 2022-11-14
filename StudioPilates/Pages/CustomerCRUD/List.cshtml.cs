@@ -25,7 +25,7 @@ namespace StudioPilates.Pages.CustomerCRUD
 
         //private readonly UserManager<AppUser> _userManager;
 
-        //public IList<string> EmailsAdmins { get; set; }
+        public IList<string> EmailsAdmins { get; set; }
         public int CurrentPage { get; set; }
         public int NumberPages { get; set; }
 
