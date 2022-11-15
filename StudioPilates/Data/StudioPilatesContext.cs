@@ -1,25 +1,27 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
+using StudioPilates.Models;
 
 namespace StudioPilates.Data
 {
-    public class StudioPilatesContext : DbContext
+    public class StudioPilatesContext :IdentityDbContext<AppUser>
     {
         public StudioPilatesContext(DbContextOptions<StudioPilatesContext> options)
             : base(options)
         {
         }
 
-        public DbSet<StudioPilates.Models.Customer> Customers { get; set; }
-        public DbSet<StudioPilates.Models.Address> Address { get; set; }
-        public DbSet<StudioPilates.Models.Customer_payment> Customer_Payments { get; set; }
-        public DbSet<StudioPilates.Models.Customer_plan> Customer_plans { get; set; }
-        public DbSet<StudioPilates.Models.Customer_question_response> Customer_Question_Responses { get; set; }
-        public DbSet<StudioPilates.Models.Plan> Plans { get; set; }
-        public DbSet<StudioPilates.Models.Question> Questions { get; set; }
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+        }
 
-        //public DbSet<StudioPilates.Models.Questionnaire> Questionnaires  { get; set; }
-
-
-
+        public DbSet<Customer> Customers { get; set; }
+        public DbSet<Address> Address { get; set; }
+        public DbSet<Customer_payment> Customer_Payments { get; set; }
+        public DbSet<Customer_plan> Customer_plans { get; set; }
+        public DbSet<Customer_question_response> Customer_Question_Responses { get; set; }
+        public DbSet<Plan> Plans { get; set; }
+        public DbSet<Question> Questions { get; set; }
     }
 }

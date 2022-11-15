@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.EntityFrameworkCore;
@@ -39,25 +40,25 @@ namespace StudioPilates
 
             services.AddIdentity<AppUser, IdentityRole>(options =>
             {
-                options.User.RequireUniqueEmail = true; //default = false
-                options.Password.RequireNonAlphanumeric = false; //default = true
-                options.Password.RequireUppercase = false; //default = true
-                options.Password.RequireLowercase = false; //default = true               
-                options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(3); //default = 3
-                options.Lockout.MaxFailedAccessAttempts = 3; //default = 5
-                options.SignIn.RequireConfirmedAccount = false; //default = false
-                options.SignIn.RequireConfirmedEmail = true; //default = false
-                options.SignIn.RequireConfirmedPhoneNumber = false; //default = false                
+                options.User.RequireUniqueEmail = true; //default = false (um usuário requer email único - dois usuários com o mesmo email)
+                options.Password.RequireNonAlphanumeric = false; //default = true (não requer alfanumérico)
+                options.Password.RequireUppercase = false; //default = true (não requer letra maiúscula)
+                options.Password.RequireLowercase = false; //default = true  (não requer minúscula)             
+                options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(3); //default = 3 (errar 3 vezes seguidas, so pode tentar após 3 min)
+                options.Lockout.MaxFailedAccessAttempts = 3; //default = 5 (errar 3 vezes seguidas, so pode tentar após 3 min)
+                options.SignIn.RequireConfirmedAccount = false; //default = false (não precisa de confirmação de conta)
+                options.SignIn.RequireConfirmedEmail = true; //default = false (não precisa de confirmação de email)
+                options.SignIn.RequireConfirmedPhoneNumber = false; //default = false (não precisa de confirmação de telefone)      
             }).AddEntityFrameworkStores<StudioPilatesContext>()
               .AddDefaultTokenProviders();
 
             services.ConfigureApplicationCookie(options =>
             {
                 options.Cookie.HttpOnly = true;
-                options.ExpireTimeSpan = TimeSpan.FromMinutes(5);
-                options.LoginPath = "/Login";
-                options.AccessDeniedPath = "/Login";
-                options.SlidingExpiration = true;
+                options.ExpireTimeSpan = TimeSpan.FromMinutes(10); //Expira, caso demore mais que o tempo para requisitar uma pagina
+                options.LoginPath = "/Login"; //caminho da pag de login
+                options.AccessDeniedPath = "/Login"; //caminho da pag de login qd tentar acessar uma pagina proibida
+                options.SlidingExpiration = true; //Renovar o login a cada nova requisição
             });
 
             services.AddAuthorization(options =>
@@ -69,8 +70,8 @@ namespace StudioPilates
 
             services.AddRazorPages(options =>
             {
-                options.Conventions.AuthorizePage("/Admin", "isAdmin");
-                options.Conventions.AuthorizeFolder("/CustomerCRUD", "isAdmin");
+                options.Conventions.AuthorizePage("/Admin/Admin", "isAdmin");
+                options.Conventions.AuthorizeFolder("/Admin/CustomerCRUD", "isAdmin");
             }).AddCookieTempDataProvider(options =>
             {
                 options.Cookie.IsEssential = true;
@@ -89,6 +90,11 @@ namespace StudioPilates
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            app.UseForwardedHeaders(new ForwardedHeadersOptions
+            {
+                ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto
+            });
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -96,18 +102,25 @@ namespace StudioPilates
             else
             {
                 app.UseExceptionHandler("/Error");
+                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+                //app.UseHsts();
             }
 
+            //app.UseHttpsRedirection();
             app.UseStaticFiles();
+            app.UseCookiePolicy();
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapRazorPages();
+                endpoints.MapControllers();
             });
+
             var defaultCulture = new CultureInfo("pt-BR");
             var localizationOptions = new RequestLocalizationOptions
             {

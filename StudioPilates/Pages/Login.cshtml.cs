@@ -27,7 +27,7 @@ namespace StudioPilates.Pages
             public bool Remember { get; set; }
         }
 
-        private readonly SignInManager<AppUser> _signInManager;
+        private readonly SignInManager<AppUser> _signInManager; // gerenciador do ato de efetuar login
 
         public LoginModel(SignInManager<AppUser> signInManager)
         {

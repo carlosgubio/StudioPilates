@@ -24,10 +24,10 @@ namespace StudioPilates.Services
         public async Task SendEmailAsync(string email, string subject, string textMessage, string messageHtml)
         {
             var message = new MimeMessage();
-            message.From.Add(new MailboxAddress(_emailConfiguration.NomeRemetente, _emailConfiguration.EmailRemetente));
+            message.From.Add(new MailboxAddress(_emailConfiguration.SenderName, _emailConfiguration.SenderEmail));
             message.To.Add(MailboxAddress.Parse(email));
 
-            message.Subject = _emailConfiguration.NomeRemetente + " :: " + subject;
+            message.Subject = _emailConfiguration.SenderName + " :: " + subject;
             var builder = new BodyBuilder { TextBody = textMessage, HtmlBody = messageHtml };
             message.Body = builder.ToMessageBody();
 
@@ -36,9 +36,9 @@ namespace StudioPilates.Services
                 var smtpClient = new SmtpClient();
                 smtpClient.ServerCertificateValidationCallback = (s, c, h, e) => true;
                 //await client.ConnectAsync(EmailConfiguration.MailServer, _emailSettings.MailPort, _emailSettings.UseSsl).ConfigureAwait(false);
-                await smtpClient.ConnectAsync(_emailConfiguration.EnderecoServidorEmail).ConfigureAwait(false);
+                await smtpClient.ConnectAsync(_emailConfiguration.EmailServerAddress).ConfigureAwait(false);
                 //se o servidor requer autenticação para enviar
-                await smtpClient.AuthenticateAsync(_emailConfiguration.EmailRemetente, _emailConfiguration.Senha).ConfigureAwait(false);
+                await smtpClient.AuthenticateAsync(_emailConfiguration.SenderEmail, _emailConfiguration.Password).ConfigureAwait(false);
                 await smtpClient.SendAsync(message).ConfigureAwait(false);
                 await smtpClient.DisconnectAsync(true).ConfigureAwait(false);
             }

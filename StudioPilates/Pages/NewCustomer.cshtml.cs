@@ -17,7 +17,7 @@ namespace StudioPilates.Pages
         public class Passwords
         {
             [Required(ErrorMessage = "O campo \"{0}\" é de preenchimento obrigatório.")]
-            [StringLength(16, ErrorMessage = "O campo \"{0}\" deve ter pelo menos {2} e no máximo {1} caracteres.", MinimumLength = 6)]
+            [StringLength(16, ErrorMessage = "O campo \"{0}\" deve ter pelo menos {2} e no máximo {1} caracteres.", MinimumLength = 6)] // minimo 6, maximo 16 caracteres
             [DataType(DataType.Password)]
             [Display(Name = "Senha")]
             public string Password { get; set; }
@@ -39,15 +39,15 @@ namespace StudioPilates.Pages
         {
             _context = context;
             _emailSender = emailSender;
-            _userManager = userManager;
-            _roleManager = roleManager;
+            _userManager = userManager; // manipulação para o tipo usuário
+            _roleManager = roleManager; // gerenciamento de perfis
         }
 
         [BindProperty]
         public Customer Customer { get; set; }
 
         [BindProperty]
-        public Passwords UserPassword { get; set; }
+        public Passwords UserPasswords { get; set; }
 
         public IActionResult OnGet()
         {
@@ -61,7 +61,7 @@ namespace StudioPilates.Pages
 			customer.Address = new Address();
 
 			//novos clientes sempre iniciam com essa situação
-			customer.Status = Customer.CustomerStatus.Ativo;
+			customer.Status = Customer.CustomerStatus.Cadastrado;
 
 			var userPasswords = new Passwords();
 			if (!await TryUpdateModelAsync(userPasswords, userPasswords.GetType(), nameof(userPasswords)))
@@ -138,7 +138,6 @@ namespace StudioPilates.Pages
 						"Use outro endereço de e-mail ou tente recuperar a senha deste.");
 				}
 			}
-
 			return Page();
 		}
 	}

@@ -475,8 +475,9 @@ C:\Users\carlo\source\StudioPilates\StudioPilates\obj\Debug\netcoreapp3.1\Studio
 C:\Users\carlo\source\StudioPilates\StudioPilates\obj\Debug\netcoreapp3.1\Razor\Pages\Login.cshtml.g.cs
 C:\Users\carlo\source\StudioPilates\StudioPilates\obj\Debug\netcoreapp3.1\Razor\Pages\ConfirmacaoRedefinicaoSenha.cshtml.g.cs
 C:\Users\carlo\source\StudioPilates\StudioPilates\obj\Debug\netcoreapp3.1\Razor\Pages\EmailRecuperacaoEnviado.cshtml.g.cs
-C:\Users\carlo\source\StudioPilates\StudioPilates\obj\Debug\netcoreapp3.1\Razor\Pages\RecuperarSenha.cshtml.g.cs
-C:\Users\carlo\source\StudioPilates\StudioPilates\obj\Debug\netcoreapp3.1\Razor\Pages\RedefinirSenha.cshtml.g.cs
 C:\Users\carlo\source\StudioPilates\StudioPilates\obj\Debug\netcoreapp3.1\Razor\Pages\NewCustomer.cshtml.g.cs
 C:\Users\carlo\source\StudioPilates\StudioPilates\obj\Debug\netcoreapp3.1\Razor\Pages\ConfirmationEmail.cshtml.g.cs
 C:\Users\carlo\source\StudioPilates\StudioPilates\obj\Debug\netcoreapp3.1\Razor\Pages\RegistrationPerformed.cshtml.g.cs
+C:\Users\carlo\source\StudioPilates\StudioPilates\obj\Debug\netcoreapp3.1\Razor\Pages\Recover Password.cshtml.g.cs
+C:\Users\carlo\source\StudioPilates\StudioPilates\obj\Debug\netcoreapp3.1\Razor\Pages\RedefinePassword.cshtml.g.cs
+C:\Users\carlo\source\StudioPilates\StudioPilates\obj\Debug\netcoreapp3.1\Razor\Pages\Shared\_LoginLinks.cshtml.g.cs

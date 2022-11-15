@@ -8,6 +8,7 @@ namespace StudioPilates.Models
     {
         public enum CustomerStatus
         {
+            Cadastrado,
             Ativo,
             Inativo
         }
