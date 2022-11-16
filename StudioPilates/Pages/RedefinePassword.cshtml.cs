@@ -67,13 +67,13 @@ namespace StudioPilates.Pages
             if (user == null)
             {
                 // Não revela que o usuário não existe
-                return RedirectToPage("/ConfirmacaoRedefinicaoSenha");
+                return RedirectToPage("/ConfirmationResetPassword");
             }
 
             var result = await _userManager.ResetPasswordAsync(user, Data.Token, Data.Password);
             if (result.Succeeded)
             {
-                return RedirectToPage("./ConfirmacaoRedefinicaoSenha");
+                return RedirectToPage("./ConfirmationResetPassword");
             }
 
             foreach (var erro in result.Errors)

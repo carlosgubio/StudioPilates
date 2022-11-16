@@ -47,7 +47,7 @@ namespace StudioPilates
                 options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(3); //default = 3 (errar 3 vezes seguidas, so pode tentar após 3 min)
                 options.Lockout.MaxFailedAccessAttempts = 3; //default = 5 (errar 3 vezes seguidas, so pode tentar após 3 min)
                 options.SignIn.RequireConfirmedAccount = false; //default = false (não precisa de confirmação de conta)
-                options.SignIn.RequireConfirmedEmail = true; //default = false (não precisa de confirmação de email)
+                options.SignIn.RequireConfirmedEmail = false; //default = false (não precisa de confirmação de email)
                 options.SignIn.RequireConfirmedPhoneNumber = false; //default = false (não precisa de confirmação de telefone)      
             }).AddEntityFrameworkStores<StudioPilatesContext>()
               .AddDefaultTokenProviders();
@@ -55,7 +55,7 @@ namespace StudioPilates
             services.ConfigureApplicationCookie(options =>
             {
                 options.Cookie.HttpOnly = true;
-                options.ExpireTimeSpan = TimeSpan.FromMinutes(10); //Expira, caso demore mais que o tempo para requisitar uma pagina
+                options.ExpireTimeSpan = TimeSpan.FromMinutes(30); //Expira, caso demore mais que o tempo para requisitar uma pagina
                 options.LoginPath = "/Login"; //caminho da pag de login
                 options.AccessDeniedPath = "/Login"; //caminho da pag de login qd tentar acessar uma pagina proibida
                 options.SlidingExpiration = true; //Renovar o login a cada nova requisição
@@ -106,7 +106,7 @@ namespace StudioPilates
                 //app.UseHsts();
             }
 
-            //app.UseHttpsRedirection();
+            app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCookiePolicy();
 

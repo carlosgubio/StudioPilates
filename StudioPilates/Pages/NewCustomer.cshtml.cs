@@ -38,7 +38,7 @@ namespace StudioPilates.Pages
 			UserManager<AppUser> userManager, RoleManager<IdentityRole> roleManager)
         {
             _context = context;
-            _emailSender = emailSender;
+            _emailSender = emailSender; //envio de email de confirmação
             _userManager = userManager; // manipulação para o tipo usuário
             _roleManager = roleManager; // gerenciamento de perfis
         }
@@ -118,7 +118,7 @@ namespace StudioPilates.Pages
 						msg.Append("<h1>Instituto Movimento Consciente :: Confirmação de E-mail</h1>");
 						msg.Append($"<p>Por favor, confirme seu e-mail " +
 							$"<a href='{HtmlEncoder.Default.Encode(urlConfirmationEmail)}'>clicando aqui</a>.</p>");
-						msg.Append("<p>Atenciosamente,<br>Equipe de Suporte IMC</p>");
+						msg.Append("<p>Atenciosamente,<br>Equipe de Suporte Instituto Movimento Consciente!</p>");
 						await _emailSender.SendEmailAsync(user.Email, "Confirmação de E-mail", "", msg.ToString());
 
 						return RedirectToPage("/RegistrationPerformed");

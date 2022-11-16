@@ -18,27 +18,27 @@
                 </button>
                 <div class="navbar-collapse collapse ">
                     <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item"> <a class="nav-link text-dark" asp-area="" asp-page="/CustomerCRUD/List">Cliente</a> </li>
-                        <li class="nav-item"> <a class="nav-link text-dark" asp-area="" asp-page="/PlanCRUD/List">Plano</a> </li>
-                        <li class="nav-item"> <a class="nav-link text-dark" asp-area="" asp-page="/QuestionCRUD/List">Perguntas</a> </li>
-                        <li class="nav-item"> <a class="nav-link text-dark" asp-area="" asp-page="/Customer_question_responseCRUD/List">Questionário</a>
+                        <li class="nav-item"> <a class="nav-link text-dark" asp-area="" asp-page="/Admin/CustomerCRUD/List">Cliente</a> </li>
+                        <li class="nav-item"> <a class="nav-link text-dark" asp-area="" asp-page="/Admin/PlanCRUD/List">Plano</a> </li>
+                        <li class="nav-item"> <a class="nav-link text-dark" asp-area="" asp-page="/Admin/QuestionCRUD/List">Perguntas</a> </li>
+                        <li class="nav-item"> <a class="nav-link text-dark" asp-area="" asp-page="/Admin/Customer_question_responseCRUD/List">Questionário</a>
                     </ul>
                 </div>
                 <div class="col text-right">
-                    <div class="nav-item"><a class="nav-link text-dark" asp-area="" asp-page="/Contact">Contato</a></div>
+                    <div class="nav-item"><a class="nav-link text-dark" asp-area="" asp-page="/Contact">Suporte Técnico</a></div>
                 </div>
             </div>
         </nav>
     </header>
-    <div class="container" style="padding-bottom:2px;">
+    <div class="container" style="padding-bottom:72px;">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
+    <footer class="footer bg-light text-center p-4 fixed-bottom">
         <div class="container">
-            &copy; 2022 - Instituto Movimento Consciente - <a asp-area="" asp-page="/Privacy">Política de Privacidade</a>
+            <span class="text-dark">Copyright &copy; 2020 - Todos os direitos reservados</span>
         </div>
     </footer>
 
@@ -46,7 +46,11 @@
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     <script defer scr="https://friconix.com/cdn/friconix.js"></script>
-
+    <script>
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip()
+        })
+    </script>
 
     @RenderSection("Scripts", required: false)
 </body>

@@ -24,7 +24,7 @@ namespace StudioPilates.Pages
 
         //public async Task OnGetAsync()
         //{
-        //    Customers = await _context.Customer.ToListAsync<Customer>();
+        //    Customers = await _context.Customers.ToListAsync<Customer>();
         //}
     }
 }
