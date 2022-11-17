@@ -1,28 +1,48 @@
 ﻿<!DOCTYPE html>
-<html lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Instituto Movimento Consciente :: @ViewData["Title"]</title>
+    <meta charset="utf-8" lang="pt-br" />
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" />
+    <title>Instituto Movimento Consciente :: Área Administrativa</title>
 </head>
 <body>
-    <header>
+    @*<header class="bg-dark">
+            <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+                <div class="container">
+                    <a class="navbar-brand" asp-area="" asp-page="/Index">IMC</a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                            aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="navbar-collapse collapse ">
+                        <ul class="navbar-nav flex-grow-1">
+                            <li class="nav-item"> <a class="nav-link text-dark" asp-area="" asp-page="/Admin/CustomerCRUD/List">Cliente</a> </li>
+                            <li class="nav-item"> <a class="nav-link text-dark" asp-area="" asp-page="/Admin/PlanCRUD/List">Plano</a> </li>
+                            <li class="nav-item"> <a class="nav-link text-dark" asp-area="" asp-page="/Admin/QuestionCRUD/List">Perguntas</a> </li>
+                            <li class="nav-item"> <a class="nav-link text-dark" asp-area="" asp-page="/Admin/Customer_question_responseCRUD/List">Questionário</a>
+                        </ul>
+                    </div>
+                    <div class="col text-right">
+                        <div class="nav-item"><a class="nav-link text-dark" asp-area="" asp-page="/Contact">Suporte Técnico</a></div>
+                    </div>
+                </div>
+            </nav>
+        </header>*@
+    <header class="bg-dark">
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container">
-                <a class="navbar-brand" asp-area="" asp-page="/Index">IMC</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                <a class="navbar-brand" asp-page="/Index">IMC</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="navbar-collapse collapse ">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item"> <a class="nav-link text-dark" asp-area="" asp-page="/Admin/CustomerCRUD/List">Cliente</a> </li>
-                        <li class="nav-item"> <a class="nav-link text-dark" asp-area="" asp-page="/Admin/PlanCRUD/List">Plano</a> </li>
-                        <li class="nav-item"> <a class="nav-link text-dark" asp-area="" asp-page="/Admin/QuestionCRUD/List">Perguntas</a> </li>
-                        <li class="nav-item"> <a class="nav-link text-dark" asp-area="" asp-page="/Admin/Customer_question_responseCRUD/List">Questionário</a>
-                    </ul>
+                <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                    <div class="navbar-nav">
+                        <a class="nav-item nav-link" asp-area="" asp-page="/Admin/CustomerCRUD/List">Cliente</a> 
+                        <a class="nav-item nav-link" asp-area="" asp-page="/Admin/PlanCRUD/List">Plano</a> 
+                        <a class="nav-item nav-link" asp-area="" asp-page="/Admin/QuestionCRUD/List">Perguntas</a> 
+                        <a class="nav-item nav-link" asp-area="" asp-page="/Admin/Customer_question_responseCRUD/List">Questionário</a>
+                    </div>
                 </div>
                 <div class="col text-right">
                     <div class="nav-item"><a class="nav-link text-dark" asp-area="" asp-page="/Contact">Suporte Técnico</a></div>
@@ -30,15 +50,15 @@
             </div>
         </nav>
     </header>
-    <div class="container" style="padding-bottom:72px;">
-        <main role="main" class="pb-3">
+    <section class="container" style="padding-bottom:72px;">
+        <main role="main">
             @RenderBody()
         </main>
-    </div>
+    </section>
 
     <footer class="footer bg-light text-center p-4 fixed-bottom">
         <div class="container">
-            <span class="text-dark">Copyright &copy; 2020 - Todos os direitos reservados</span>
+            <span class="text-dark">Copyright &copy; 2022 - Todos os direitos reservados</span>
         </div>
     </footer>
 

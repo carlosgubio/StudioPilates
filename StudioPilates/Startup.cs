@@ -44,10 +44,10 @@ namespace StudioPilates
                 options.Password.RequireNonAlphanumeric = false; //default = true (não requer alfanumérico)
                 options.Password.RequireUppercase = false; //default = true (não requer letra maiúscula)
                 options.Password.RequireLowercase = false; //default = true  (não requer minúscula)             
-                options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(3); //default = 3 (errar 3 vezes seguidas, so pode tentar após 3 min)
-                options.Lockout.MaxFailedAccessAttempts = 3; //default = 5 (errar 3 vezes seguidas, so pode tentar após 3 min)
+                options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(1); //default = 3 (errar 3 vezes seguidas, so pode tentar após 1 min)
+                options.Lockout.MaxFailedAccessAttempts = 3; //default = 5 (errar 3 vezes seguidas, so pode tentar após 1 min)
                 options.SignIn.RequireConfirmedAccount = false; //default = false (não precisa de confirmação de conta)
-                options.SignIn.RequireConfirmedEmail = false; //default = false (não precisa de confirmação de email)
+                options.SignIn.RequireConfirmedEmail = true; //default = false (não precisa de confirmação de email)
                 options.SignIn.RequireConfirmedPhoneNumber = false; //default = false (não precisa de confirmação de telefone)      
             }).AddEntityFrameworkStores<StudioPilatesContext>()
               .AddDefaultTokenProviders();
@@ -70,8 +70,8 @@ namespace StudioPilates
 
             services.AddRazorPages(options =>
             {
-                options.Conventions.AuthorizePage("/Admin/Admin", "isAdmin");
-                options.Conventions.AuthorizeFolder("/Admin/CustomerCRUD", "isAdmin");
+                options.Conventions.AuthorizePage("/Pages", "isAdmin");
+                options.Conventions.AuthorizeFolder("/CustomerCRUD", "isAdmin");
             }).AddCookieTempDataProvider(options =>
             {
                 options.Cookie.IsEssential = true;
@@ -106,7 +106,7 @@ namespace StudioPilates
                 //app.UseHsts();
             }
 
-            app.UseHttpsRedirection();
+            //app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCookiePolicy();
 

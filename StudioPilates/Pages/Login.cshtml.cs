@@ -26,8 +26,8 @@ namespace StudioPilates.Pages
             [Display(Name = "Lembrar de mim")]
             public bool Remember { get; set; }
         }
-
-        private readonly SignInManager<AppUser> _signInManager; // gerenciador do ato de efetuar login
+        // gerenciador do ato de efetuar login
+        private readonly SignInManager<AppUser> _signInManager; 
 
         public LoginModel(SignInManager<AppUser> signInManager)
         {
@@ -58,7 +58,7 @@ namespace StudioPilates.Pages
             // elimina o cookie anterior para garantir um processo de login novo
             await HttpContext.SignOutAsync(IdentityConstants.ExternalScheme);
 
-            this.ReturnUrl = returnUrl;
+            this.ReturnUrl = returnUrl;            
         }
 
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)

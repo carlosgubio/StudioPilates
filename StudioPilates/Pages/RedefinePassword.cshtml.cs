@@ -19,9 +19,9 @@ namespace StudioPilates.Pages
         }
 
         [BindProperty]
-        public DadosRedefinicaoSenha Data { get; set; }
+        public PasswordResetData Data { get; set; }
 
-        public class DadosRedefinicaoSenha
+        public class PasswordResetData
         {
             [Required(ErrorMessage = "O campo \"{0}\" é de preenchimento obrigatório.")]
             [EmailAddress]
@@ -48,7 +48,7 @@ namespace StudioPilates.Pages
             }
             else
             {
-                Data = new DadosRedefinicaoSenha
+                Data = new PasswordResetData
                 {
                     Token = Encoding.UTF8.GetString(WebEncoders.Base64UrlDecode(token))
                 };

@@ -11,7 +11,6 @@
     {
         <li class="nav-item">
             <a id="manage" class="nav-link text-dark" asp-area="" asp-page="/Index" title="Manage">Olá,  @appUser.Name.Substring(0, appUser.Name.IndexOf(' '))!</a>
-
         </li>
         <li class="nav-item">
             <form id="logoutForm" class="form-inline" asp-area="" asp-page="/Login" asp-page-handler="logout" asp-route-returnUrl="@Url.Page("/Index", new { area = "" })">
