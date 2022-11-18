@@ -70,7 +70,7 @@ namespace StudioPilates
 
             services.AddRazorPages(options =>
             {
-                options.Conventions.AuthorizePage("/Pages", "isAdmin");
+                options.Conventions.AuthorizePage("/Admin", "isAdmin");
                 options.Conventions.AuthorizeFolder("/CustomerCRUD", "isAdmin");
             }).AddCookieTempDataProvider(options =>
             {
@@ -132,3 +132,4 @@ namespace StudioPilates
         }
     }
 }
+

@@ -6,13 +6,13 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-	  <Compile Remove="Pages\Customer_paymentCRUD\Delete.cshtml.cs" />
-	  <Compile Remove="Pages\Customer_paymentCRUD\Details.cshtml.cs" />
+	  <Compile Remove="Pages\Admin\Customer_paymentCRUD\Delete.cshtml.cs" />
+	  <Compile Remove="Pages\Admin\Customer_paymentCRUD\Details.cshtml.cs" />
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Content Remove="Pages\Customer_paymentCRUD\Delete.cshtml" />
-	  <Content Remove="Pages\Customer_paymentCRUD\Details.cshtml" />
+	  <Content Remove="Pages\Admin\Customer_paymentCRUD\Delete.cshtml" />
+	  <Content Remove="Pages\Admin\Customer_paymentCRUD\Details.cshtml" />
 	</ItemGroup>
 
 	<ItemGroup>
