@@ -10,7 +10,6 @@ using System.Threading.Tasks;
 
 namespace StudioPilates.Pages.QuestionCRUD
 {
-    [Authorize(Policy = "isAdmin")]
     public class CreateModel : PageModel
     {
         private readonly StudioPilatesContext _context;

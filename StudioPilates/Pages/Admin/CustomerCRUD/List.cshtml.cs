@@ -15,7 +15,7 @@ using System.Threading.Tasks;
 
 namespace StudioPilates.Pages.CustomerCRUD
 {
-    //[Authorize(Policy = "isAdmin")]
+   
     public class ListModel : PageModel
     {
         private const int pageSize = 12;
@@ -30,8 +30,7 @@ namespace StudioPilates.Pages.CustomerCRUD
         public int CurrentPage { get; set; }
         public int NumberPages { get; set; }
 
-        public ListModel(StudioPilatesContext context,
-             UserManager<AppUser> userManager, RoleManager<IdentityRole> roleManager, IWebHostEnvironment webHostEnvironment)
+        public ListModel(StudioPilatesContext context, UserManager<AppUser> userManager, RoleManager<IdentityRole> roleManager, IWebHostEnvironment webHostEnvironment)
         {
             this._context = context;
             this._userManager = userManager;
@@ -39,117 +38,110 @@ namespace StudioPilates.Pages.CustomerCRUD
             this._webHostEnvironment = webHostEnvironment;
         }
 
-        public IList<Customer> Customers { get; set; }
+        public IList<Customer> Customer { get; set; }
 
-        public async Task OnGetAsync()
+        public async Task OnGetAsync([FromQuery(Name = "q")] string searchTerm, [FromQuery(Name = "o")] int? order = 1, [FromQuery(Name = "p")] int? page = 1)
         {
-            EmailsAdmins = (await _userManager.GetUsersInRoleAsync("admin")).
-                Select(x => x.Email).ToList();
-            Customers = await _context.Customers.ToListAsync();
+            Customer = await _context.Customers.ToListAsync();
+
+            EmailsAdmins = (await _userManager.GetUsersInRoleAsync("admin")).Select(x => x.Email).ToList();
+
+            this.CurrentPage = page.Value;
+
+            var query = _context.Customers.AsQueryable();
+
+            if (!string.IsNullOrEmpty(searchTerm))
+            {
+                query = query.Where(c => c.Name.ToLower().Contains(searchTerm.ToLower()));
+            }
+            if (order.HasValue)
+            {
+                switch (order.Value)
+                {
+                    case 1:
+                        query = query.OrderBy(c => c.Name.ToLower());
+                        break;
+                    case 2:
+                        query = query.OrderBy(c => c.Birth_date);
+                        break;
+                }
+            }
+            var queryCount = query;
+            int customerQuantity = queryCount.Count();
+            this.NumberPages = Convert.ToInt32(Math.Ceiling(customerQuantity * 1M / pageSize));
+            query = query.Skip(pageSize * (this.CurrentPage - 1)).Take(pageSize);
+
+            Customer = await query.ToListAsync();
         }
+        public async Task<IActionResult> OnPostDeleteAsync(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
 
-        //    public async Task OnGetAsync([FromQuery(Name = "q")] string searchTerm, [FromQuery(Name = "o")] int? order = 1, [FromQuery(Name = "p")] int? page = 1)
-        //    {
-        //        EmailsAdmins = (await _userManager.GetUsersInRoleAsync("admin")).Select(x => x.Email).ToList();
-        //        Customers = await _context.Customers.ToListAsync();
+            var customer = await _context.Customers.FindAsync(id);
 
-        //        this.CurrentPage = page.Value;
+            if (customer != null)
+            {
+                _context.Customers.Remove(customer);
+                if (await _context.SaveChangesAsync() > 0)
+                {
+                    var photoFilePath = Path.Combine(
+                        _webHostEnvironment.WebRootPath,
+                        "Photo",
+                        customer.Id_customer.ToString("D6") + ".Jpeg");
+                    if (System.IO.File.Exists(photoFilePath))
+                    {
+                        System.IO.File.Delete(photoFilePath);
+                    }
+                    AppUser user = await _userManager.FindByNameAsync(customer.Email);
+                    if (user != null) await _userManager.DeleteAsync(user);
+                }
 
-        //        var query = _context.Customers.AsQueryable();
+            }
+            return RedirectToPage("./List");
+        }
+        public async Task<IActionResult> OnPostDelAdminAsync(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
 
-        //        if (!string.IsNullOrEmpty(searchTerm))
-        //        {
-        //            query = query.Where(c => c.Name.ToLower().Contains(searchTerm.ToLower()));
-        //        }
-        //        if (order.HasValue)
-        //        {
-        //            switch (order.Value)
-        //            {
-        //                case 1:
-        //                    query = query.OrderBy(c => c.Name.ToLower());
-        //                    break;
-        //                case 2:
-        //                    query = query.OrderBy(c => c.Birth_date);
-        //                    break;
-        //            }
-        //        }
-        //        var queryCount = query;
-        //        int customerQuantity = queryCount.Count();
-        //        this.NumberPages = Convert.ToInt32(Math.Ceiling(customerQuantity * 1M / pageSize));
-        //        query = query.Skip(pageSize * (this.CurrentPage - 1)).Take(pageSize);
+            var customer = await _context.Customers.FindAsync(id);
 
-        //        Customers = await query.ToListAsync();
-        //    }
-        //    public async Task<IActionResult> OnPostDeleteAsync(int? id)
-        //    {
-        //        if(id == null)
-        //        {
-        //            return NotFound();
-        //        }
+            if (customer != null)
+            {
+                AppUser user = await _userManager.FindByNameAsync(customer.Email);
+                if (user != null)
+                {
+                    await _userManager.RemoveFromRoleAsync(user, "admin");
+                }
+            }
+            return RedirectToPage("./List");
+        }
+        public async Task<IActionResult> OnPostSetAdminAsync(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
 
-        //        var customer = await _context.Customers.FindAsync(id);
+            var customer = await _context.Customers.FindAsync(id);
 
-        //        if(customer != null)
-        //        {
-        //            _context.Customers.Remove(customer);
-        //            if(await _context.SaveChangesAsync() > 0)
-        //            {
-        //                var photoFilePath = Path.Combine(
-        //                    _webHostEnvironment.WebRootPath,
-        //                    "Photo",
-        //                    customer.Id_customer.ToString("D6") + ".Jpeg");
-        //                if (System.IO.File.Exists(photoFilePath))
-        //                {
-        //                    System.IO.File.Delete(photoFilePath);
-        //                }
-        //                AppUser user = await _userManager.FindByNameAsync(customer.Email);
-        //                if (user != null) await _userManager.DeleteAsync(user);
-        //            }
+            if (customer != null)
+            {
+                AppUser user = await _userManager.FindByNameAsync(customer.Email);
+                if (user != null)
+                {
+                    if (!await _roleManager.RoleExistsAsync("admin"))
+                        await _roleManager.CreateAsync(new IdentityRole("admin"));
 
-        //        }
-        //        return RedirectToPage("./List");
-        //    }
-        //    public async Task<IActionResult> OnPostDelAdminAsync(int? id)
-        //    {
-        //        if (id == null)
-        //        {
-        //            return NotFound();
-        //        }
-
-        //        var customer = await _context.Customers.FindAsync(id);
-
-        //        if (customer != null)
-        //        {
-        //            AppUser user = await _userManager.FindByNameAsync(customer.Email);
-        //            if (user != null)
-        //            {
-        //                await _userManager.RemoveFromRoleAsync(user, "admin");
-        //            }
-        //        }
-        //        return RedirectToPage("./List");
-        //    }
-        //    public async Task<IActionResult> OnPostSetAdminAsync(int? id)
-        //    {
-        //        if (id == null)
-        //        {
-        //            return NotFound();
-        //        }
-
-        //        var customer = await _context.Customers.FindAsync(id);
-
-        //        if (customer != null)
-        //        {
-        //            AppUser user = await _userManager.FindByNameAsync(customer.Email);
-        //            if (user != null)
-        //            {
-        //                if (!await _roleManager.RoleExistsAsync("admin"))
-        //                    await _roleManager.CreateAsync(new IdentityRole("admin"));
-
-        //                await _userManager.AddToRoleAsync(user, "admin");
-        //            }
-        //        }
-        //        return RedirectToPage("./List");
-        //    }
-        //}
+                    await _userManager.AddToRoleAsync(user, "admin");
+                }
+            }
+            return RedirectToPage("./List");
+        }
     }
 }

@@ -9,7 +9,6 @@ using System.Threading.Tasks;
 
 namespace StudioPilates.Pages.PlanCRUD
 {
-    //[Authorize(Policy = "isAdmin")]
     public class ListModel : PageModel
     {
         private readonly StudioPilatesContext _context;

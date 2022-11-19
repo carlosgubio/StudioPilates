@@ -9,8 +9,6 @@ using System.Threading.Tasks;
 
 namespace StudioPilates.Pages.Customer_question_responseCRUD
 {
-    [Authorize(Policy = "isAdmin")]
-
     public class CreateModel : PageModel
     {
         private readonly StudioPilatesContext _context;

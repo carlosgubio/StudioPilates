@@ -24,7 +24,7 @@ namespace StudioPilates.Models
 
         [Required(ErrorMessage = "O campo {0} é de preenchimento obrigatório.")]
         [MaxLength(50, ErrorMessage = "O campo {0} deve ter no máximo {1} caracteres")]
-        [Display(Name = "Duração do contrato")]
+        [Display(Name = "Duração em meses.")]
         public string Contract_recurrence { get; set; }
     }
 }

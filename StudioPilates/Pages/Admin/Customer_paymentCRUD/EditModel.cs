@@ -9,8 +9,6 @@ using System.Threading.Tasks;
 
 namespace StudioPilates.Pages.Customer_paymentCRUD
 {
-    [Authorize(Policy = "isAdmin")]
-
     public class EditModel : PageModel
     {
         private readonly StudioPilatesContext _context;

@@ -11,8 +11,6 @@ using System.Threading.Tasks;
 
 namespace StudioPilates.Pages.CustomerCRUD
 {
-    //[Authorize(Policy = "isAdmin")]
-
     public class DetailsModel : PageModel
     {
         private readonly StudioPilatesContext _context;
@@ -24,11 +22,14 @@ namespace StudioPilates.Pages.CustomerCRUD
 
         public string PhotoPath { get; set; }
 
+        [BindProperty]
+        [Display(Name = "Foto do Cliente")]
+        public IFormFile CustomerPhoto { get; set; }
         public DetailsModel(StudioPilatesContext context, IWebHostEnvironment webHostEnvironment)
         {
             _context = context;
             _webHostEnvironment = webHostEnvironment;
-            PhotoPath = "~/Photo";
+            PhotoPath = "~/Photo/sem_imagem.jpg";
         }
 
         public async Task<IActionResult> OnGetAsync(int? id)

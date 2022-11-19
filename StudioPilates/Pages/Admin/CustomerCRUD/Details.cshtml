@@ -5,7 +5,7 @@
     ViewData["Title"] = "Detalhes do Cliente";
 }
 
-<h1>@ViewData["Title"]</h1>
+<h1 class="text-center">@ViewData["Title"]</h1>
 
 <div>
     <h4>Dados Pessoais</h4>
@@ -52,5 +52,20 @@
 <div>
     <a asp-page="./List">Voltar à Listagem</a>
 </div>
-@{await Html.RenderPartialAsync("_CustomConfirm");}
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{await Html.RenderPartialAsync("_CustomConfirm");}
+    @{await Html.RenderPartialAsync("_ConsultaCEP");}
+    <script>
+        $(document).ready(function () {
+            $(".custom-file-input").change(function () {
+                var file = $(this).val().split("\\").pop();
+                $(this).next(".custom-file-label").html(file);
+            });
+        });
+    </script>
+
+
+
+}
 

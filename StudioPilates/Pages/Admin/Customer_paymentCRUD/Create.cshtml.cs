@@ -7,8 +7,6 @@ using System.Threading.Tasks;
 
 namespace StudioPilates.Pages.Customer_paymentCRUD
 {
-    [Authorize(Roles = "admin")]
-
     public class CreateModel : PageModel
     {
         private readonly StudioPilatesContext _context;

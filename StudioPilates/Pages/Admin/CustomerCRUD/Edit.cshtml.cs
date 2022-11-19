@@ -12,8 +12,6 @@ using System.Threading.Tasks;
 
 namespace StudioPilates.Pages.CustomerCRUD
 {
-    //[Authorize(Policy = "isAdmin")]
-
     public class EditModel : PageModel
     {
         private readonly StudioPilatesContext _context;

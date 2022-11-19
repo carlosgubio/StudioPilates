@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="~/css/site.css" />
 </head>
 <body>
-    @*<header>
+    <header>
             <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
                 <div class="container">
                     <a class="navbar-brand" asp-area="" asp-page="/Index">Home</a>
@@ -17,57 +17,16 @@
                         <span class="navbar-toggler-icon"></span>
                     </button>
                     <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
-                <ul class="navbar-nav flex-grow-1">
-                    <li class="nav-item"> <a class="nav-link text-dark" asp-area="" asp-page="/Index">Principal</a></li>
-                </ul>
             </div>
-                    <div class="col-4 col-sm-4 text-right">
-                        <a asp-area="" asp-page="/Admin/CustomerCRUD/List">Administrar</a>
-                    </div>
-                    <div class="align-self-end">
-                        <partial name="_LoginLinks" />
+                    <div class="col-4 col-sm-4 text-center">
+                        <a asp-area="" asp-page="/Admin/CustomerCRUD/List">Acessar</a>
                     </div>
                 </div>
-                <div class="col text-right">
-                    <div class="nav-item"><a class="nav-link text-dark" asp-area="" asp-page="/Contact">Contato</a></div>
+                <div class="text-right">
+                    <div class="nav-item"><a class="nav-link text-dark" asp-area="" asp-page="/Contact">Suporte</a></div>
                 </div>
             </nav>
-        </header>*@
-    <header>
-        <nav class="navbar navbar-expand-lg navbar-toggleable-lg navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container">
-                <a class="navbar-brand" asp-area="" asp-page="/Index">Home</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Index">Principal</a>
-                        </li>
-                    </ul>
-                </div>
-                <div class="navbar-collapse collapse">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a asp-area="" asp-page="/Admin/CustomerCRUD/List">Administrar</a>
-                        </li>
-                    </ul>
-                </div>
-                <div class="align-self-end">
-                    <partial name="_LoginLinks" />
-                </div>
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="navbar-nav flex-grow-1">
-                    <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-page="/Contact">Contato</a>
-                    </li>
-                </ul>
-            </div>
-        </nav>
-    </header>
+        </header>
     <div class="container">
         <partial name="_CookieConsentPartial" />
         <main role="main" class="pb-3">

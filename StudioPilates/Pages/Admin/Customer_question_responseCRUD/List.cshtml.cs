@@ -8,8 +8,6 @@ using System.Threading.Tasks;
 
 namespace StudioPilates.Pages.Customer_question_responseCRUD
 {
-    [Authorize(Policy = "isAdmin")]
-
     public class ListModel : PageModel
     {
         private readonly StudioPilatesContext _context;

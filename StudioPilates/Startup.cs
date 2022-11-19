@@ -47,7 +47,7 @@ namespace StudioPilates
                 options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(1); //default = 3 (errar 3 vezes seguidas, so pode tentar após 1 min)
                 options.Lockout.MaxFailedAccessAttempts = 3; //default = 5 (errar 3 vezes seguidas, so pode tentar após 1 min)
                 options.SignIn.RequireConfirmedAccount = false; //default = false (não precisa de confirmação de conta)
-                options.SignIn.RequireConfirmedEmail = true; //default = false (não precisa de confirmação de email)
+                options.SignIn.RequireConfirmedEmail = false; //default = false (não precisa de confirmação de email)
                 options.SignIn.RequireConfirmedPhoneNumber = false; //default = false (não precisa de confirmação de telefone)      
             }).AddEntityFrameworkStores<StudioPilatesContext>()
               .AddDefaultTokenProviders();
@@ -61,30 +61,33 @@ namespace StudioPilates
                 options.SlidingExpiration = true; //Renovar o login a cada nova requisição
             });
 
-            services.AddAuthorization(options =>
-            {
-                //adiciona uma política de acesso chamada isAdmin
-                options.AddPolicy("isAdmin", policy =>
-                    policy.RequireRole("admin"));
-            });
+            services.AddAuthorization();
+            //services.AddAuthorization(options =>
+            //{
+            //    //adiciona uma política de acesso chamada isAdmin
+            //    options.AddPolicy("isAdmin", policy =>
+            //        policy.RequireRole("admin"));
+            //});
+            services.AddRazorPages();
 
-            services.AddRazorPages(options =>
-            {
-                options.Conventions.AuthorizePage("/Admin", "isAdmin");
-                options.Conventions.AuthorizeFolder("/CustomerCRUD", "isAdmin");
-            }).AddCookieTempDataProvider(options =>
-            {
-                options.Cookie.IsEssential = true;
-            });
+            //services.AddRazorPages(options =>
+            //{
+            //    options.Conventions.AuthorizePage("/Admin", "isAdmin");
+            //    options.Conventions.AuthorizeFolder("/CustomerCRUD", "isAdmin");
+            //}).AddCookieTempDataProvider(options =>
+            //{
+            //    options.Cookie.IsEssential = true;
+            //});
 
-            services.AddMvc();
+            //services.AddMvc();
 
             services.AddDbContext<StudioPilatesContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("StudioPilatesContext")));
 
-            services.Configure<EmailConfiguration>(Configuration.GetSection("EmailConfiguration"));
-            //services.AddSingleton<IEmailSender, EmailSender>();
-            services.AddSingleton<IEmailSender, SendGridSender>();
+            //services.Configure<EmailConfiguration>(Configuration.GetSection("EmailConfiguration"));
+            ////services.AddSingleton<IEmailSender, EmailSender>();
+            //services.AddSingleton<IEmailSender, SendGridSender>();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -106,9 +109,9 @@ namespace StudioPilates
                 //app.UseHsts();
             }
 
-            //app.UseHttpsRedirection();
+            app.UseHttpsRedirection();
             app.UseStaticFiles();
-            app.UseCookiePolicy();
+            //app.UseCookiePolicy();
 
             app.UseRouting();
 
@@ -118,7 +121,7 @@ namespace StudioPilates
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapRazorPages();
-                endpoints.MapControllers();
+                //endpoints.MapControllers();
             });
 
             var defaultCulture = new CultureInfo("pt-BR");

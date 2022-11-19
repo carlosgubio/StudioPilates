@@ -6,8 +6,6 @@ using System.Threading.Tasks;
 
 namespace StudioPilates.Pages.Customer_planCRUD
 {
-    [Authorize(Policy = "isAdmin")]
-
     public class CreateModel : PageModel
     {
         private readonly StudioPilates.Data.StudioPilatesContext _context;

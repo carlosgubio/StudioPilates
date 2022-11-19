@@ -447,7 +447,6 @@ C:\Users\carlo\source\StudioPilates\StudioPilates\obj\Debug\netcoreapp3.1\Razor\
 C:\Users\carlo\source\StudioPilates\StudioPilates\obj\Debug\netcoreapp3.1\Razor\Pages\ConfirmationEmail.cshtml.g.cs
 C:\Users\carlo\source\StudioPilates\StudioPilates\obj\Debug\netcoreapp3.1\Razor\Pages\RegistrationPerformed.cshtml.g.cs
 C:\Users\carlo\source\StudioPilates\StudioPilates\obj\Debug\netcoreapp3.1\Razor\Pages\RedefinePassword.cshtml.g.cs
-C:\Users\carlo\source\StudioPilates\StudioPilates\obj\Debug\netcoreapp3.1\Razor\Pages\Shared\_LoginLinks.cshtml.g.cs
 C:\Users\carlo\source\StudioPilates\StudioPilates\obj\Debug\netcoreapp3.1\Razor\Pages\Shared\_CookieConsentPartial.cshtml.g.cs
 C:\Users\carlo\source\StudioPilates\StudioPilates\obj\Debug\netcoreapp3.1\Razor\Pages\ConfirmationResetPassword.cshtml.g.cs
 C:\Users\carlo\source\StudioPilates\StudioPilates\obj\Debug\netcoreapp3.1\Razor\Pages\RecoverPassword.cshtml.g.cs

@@ -10,7 +10,6 @@ using System.Threading.Tasks;
 
 namespace StudioPilates.Pages.CustomerCRUD
 {
-    //[Authorize(Policy = "isAdmin")]
     public class CreateModel : PageModel
     {
         [BindProperty]
@@ -41,7 +40,7 @@ namespace StudioPilates.Pages.CustomerCRUD
             var customer = new Customer();
             customer.Address = new Address();
             //novos clientes sempre iniciam com essa situação
-            customer.Status = Customer.CustomerStatus.Cadastrado;
+            //customer.Status = Customer.CustomerStatus.Cadastrado;
 
             if (await TryUpdateModelAsync(customer, Customer.GetType(), nameof(Customer)))
             {
