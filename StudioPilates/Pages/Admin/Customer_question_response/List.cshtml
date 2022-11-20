@@ -1,0 +1,52 @@
+﻿@page
+@model StudioPilates.Pages.Customer_question_response.ListModel
+
+@{
+    ViewData["Title"] = "Questionário";
+}
+
+<header>
+    <div class="row align-items-center">
+        <div class="col-sm-12 text-center"><h1>@ViewData["Title"]</h1></div>
+    </div>
+</header>
+
+<hr class="mt-1" />
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Customer_question_response[0].Id_customer)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Customer_question_response[0].Id_question)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Customer_question_response[0].Response)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Customer_question_response)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Id_customer)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Id_question)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Response)
+                </td>
+                <td>
+                    <a asp-page="./Edit" asp-route-id="@item.Id_customer_question_response">Atualizar</a> |
+                    <a asp-page="./Details" asp-route-id="@item.Id_customer_question_response">Detalhes</a> |
+                    <a asp-page="./Delete" asp-route-id="@item.Id_customer_question_response">Excluir</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

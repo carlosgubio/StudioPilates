@@ -79,7 +79,7 @@ namespace StudioPilates
             //    options.Cookie.IsEssential = true;
             //});
 
-            //services.AddMvc();
+            services.AddMvc();
 
             services.AddDbContext<StudioPilatesContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("StudioPilatesContext")));
@@ -121,7 +121,7 @@ namespace StudioPilates
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapRazorPages();
-                //endpoints.MapControllers();
+                endpoints.MapControllers();
             });
 
             var defaultCulture = new CultureInfo("pt-BR");

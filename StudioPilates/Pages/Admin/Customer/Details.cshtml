@@ -1,0 +1,59 @@
+﻿@page
+@model StudioPilates.Pages.Customer.DetailsModel
+
+@{
+    ViewData["Title"] = "Detalhes do Cliente";
+}
+
+<h1 class="text-center">@ViewData["Title"]</h1>
+
+<div>
+    <h4>Dados Pessoais</h4>
+    <dl class="row">
+        <dt class="col-sm-2">@Html.DisplayNameFor(model => model.Customer.Name)</dt>
+        <dd class="col-sm-10">@Html.DisplayFor(model => model.Customer.Name)</dd>
+        <dt class="col-sm-2">@Html.DisplayNameFor(model => model.Customer.Email)</dt>
+        <dd class="col-sm-10">@Html.DisplayFor(model => model.Customer.Email)</dd>
+        <dt class="col-sm-2">@Html.DisplayNameFor(model => model.Customer.Phone)</dt>
+        <dd class="col-sm-10">@Html.DisplayFor(model => model.Customer.Phone)</dd>
+        <dt class="col-sm-2">@Html.DisplayNameFor(model => model.Customer.Gender)</dt>
+        <dd class="col-sm-10">@Html.DisplayFor(model => model.Customer.Gender)</dd>
+        <dt class="col-sm-2">@Html.DisplayNameFor(model => model.Customer.Occupation)</dt>
+        <dd class="col-sm-10">@Html.DisplayFor(model => model.Customer.Occupation)</dd>
+        <dt class="col-sm-2">@Html.DisplayNameFor(model => model.Customer.Birth_date)</dt>
+        <dd class="col-sm-10">@Html.DisplayFor(model => model.Customer.Birth_date)</dd>
+    </dl>
+    <h4>Endereço</h4>
+    <dl class="row">
+        <dt class="col-sm-2">@Html.DisplayNameFor(model => model.Customer.Address.Street)</dt>
+        <dd class="col-sm-10">@Html.DisplayFor(model => model.Customer.Address.Street)</dd>
+        <dt class="col-sm-2">@Html.DisplayNameFor(model => model.Customer.Address.Number)</dt>
+        <dd class="col-sm-10">@Html.DisplayFor(model => model.Customer.Address.Number)</dd>
+        <dt class="col-sm-2">@Html.DisplayNameFor(model => model.Customer.Address.District)</dt>
+        <dd class="col-sm-10">@Html.DisplayFor(model => model.Customer.Address.District)</dd>
+        <dt class="col-sm-2">@Html.DisplayNameFor(model => model.Customer.Address.Complement)</dt>
+        <dd class="col-sm-10">@Html.DisplayFor(model => model.Customer.Address.Complement)</dd>
+        <dt class="col-sm-2">@Html.DisplayNameFor(model => model.Customer.Address.City)</dt>
+        <dd class="col-sm-10">@Html.DisplayFor(model => model.Customer.Address.City)</dd>
+        <dt class="col-sm-2">@Html.DisplayNameFor(model => model.Customer.Address.State)</dt>
+        <dd class="col-sm-10">@Html.DisplayFor(model => model.Customer.Address.State)</dd>
+        <dt class="col-sm-2">@Html.DisplayNameFor(model => model.Customer.Address.Zip_code)</dt>
+        <dd class="col-sm-10">@Html.DisplayFor(model => model.Customer.Address.Zip_code)</dd>
+        <dt class="col-sm-2">@Html.DisplayNameFor(model => model.Customer.Address.Reference)</dt>
+        <dd class="col-sm-10">@Html.DisplayFor(model => model.Customer.Address.Reference)</dd>
+    </dl>
+    <div class="form-group">
+        <img src="@Model.PhotoPath" class="image-thumbnail" asp-append-version="true"
+             style="max-height:300px;max-width:300px;border:solid 1px gray; border-radius:5px;" />
+    </div>
+
+
+</div>
+<div>
+    <a asp-page="./List">Voltar à Listagem</a>
+</div>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{await Html.RenderPartialAsync("_CustomConfirm");}
+}
+

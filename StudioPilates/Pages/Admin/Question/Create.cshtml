@@ -1,0 +1,620 @@
+﻿@page
+@model StudioPilates.Pages.Question.CreateModel
+
+@{
+    ViewData["Title1"] = "Questionário";
+    ViewData["Title2"] = "Avaliação";
+    ViewData["Title3"] = "Anamnese";
+}
+
+<div>
+    <h2>Dados Pessoais</h2>
+    <div>
+        <dl class="form-check form-check-inline">
+            <dt class="form-check">@Html.DisplayNameFor(model => model.Customer.Name)</dt>
+            <dd class="col-form-label" for="inlineCheckbox1">@Html.DisplayFor(model => model.Customer.Name)</dd>
+            <dt class="form-check">@Html.DisplayNameFor(model => model.Customer.Email)</dt>
+            <dd class="col-form-label" for="inlineCheckbox1">@Html.DisplayFor(model => model.Customer.Email)</dd>
+        </dl>
+    </div>
+    <div>
+        <dl class="form-check form-check-inline">
+            <dt class="form-check">@Html.DisplayNameFor(model => model.Customer.Phone)</dt>
+            <dd class="col-form-label">@Html.DisplayFor(model => model.Customer.Phone)</dd>
+            <dt class="form-check">@Html.DisplayNameFor(model => model.Customer.Gender)</dt>
+            <dd class="col-form-label">@Html.DisplayFor(model => model.Customer.Gender)</dd>
+            <dt class="form-check">@Html.DisplayNameFor(model => model.Customer.Occupation)</dt>
+            <dd class="col-form-label">@Html.DisplayFor(model => model.Customer.Occupation)</dd>
+            <dt class="form-check">@Html.DisplayNameFor(model => model.Customer.Birth_date)</dt>
+            <dd class="col-form-label">@Html.DisplayFor(model => model.Customer.Birth_date)</dd>
+        </dl>
+    </div>
+
+
+    <h2>Endereço</h2>
+    <div>
+        <dl class="form-check form-check-inline">
+            <dt class="form-check">@Html.DisplayNameFor(model => model.Customer.Address.Street)</dt>
+            <dd class="col-form-label">@Html.DisplayFor(model => model.Customer.Address.Street)</dd>
+            <dt class="form-check">@Html.DisplayNameFor(model => model.Customer.Address.Number)</dt>
+            <dd class="col-form-label">@Html.DisplayFor(model => model.Customer.Address.Number)</dd>
+            <dt class="form-check">@Html.DisplayNameFor(model => model.Customer.Address.District)</dt>
+            <dd class="col-form-label">@Html.DisplayFor(model => model.Customer.Address.District)</dd>
+        </dl>
+    </div>
+    <div>
+        <dl class="form-check form-check-inline">
+            <dt class="form-check">@Html.DisplayNameFor(model => model.Customer.Address.Complement)</dt>
+            <dd class="col-form-label">@Html.DisplayFor(model => model.Customer.Address.Complement)</dd>
+            <dt class="form-check">@Html.DisplayNameFor(model => model.Customer.Address.Reference)</dt>
+            <dd class="col-form-label">@Html.DisplayFor(model => model.Customer.Address.Reference)</dd>
+            <dt class="form-check">@Html.DisplayNameFor(model => model.Customer.Address.City)</dt>
+            <dd class="col-form-label">@Html.DisplayFor(model => model.Customer.Address.City)</dd>
+            <dt class="form-check">@Html.DisplayNameFor(model => model.Customer.Address.State)</dt>
+            <dd class="col-form-label">@Html.DisplayFor(model => model.Customer.Address.State)</dd>
+            <dt class="form-check">@Html.DisplayNameFor(model => model.Customer.Address.Zip_code)</dt>
+            <dd class="col-form-label">@Html.DisplayFor(model => model.Customer.Address.Zip_code)</dd>
+        </dl>
+    </div>
+</div>
+
+<h1 class="text-center">@ViewData["Title1"]</h1>
+<div class="container">
+    <div class="row">
+        <div class="two-thirds column">
+            <form class="question_box">
+                <div id="1">
+                    <h4>Por qual motivo você se interessou por Pilates?</h4>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="opcao1">
+                        <label class="form-check-label" for="inlineCheckbox1">Indicação Médica</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="opcao2">
+                        <label class="form-check-label" for="inlineCheckbox2">Condicionamento Físico e Bem Estar</label>
+                    </div>
+                </div>
+                <div id="question-2">
+                    <h4>Já fez alguma aula de Pilates?</h4>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+                        <label class="form-check-label" for="flexRadioDefault1">Não</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+                        <label class="form-check-label" for="inlineCheckbox2">Sim</label>
+                    </div>
+                    <div class="col-md-2">
+                        <label for="formGroupExampleInput-inline">Quantos meses?</label>
+                        <input type="text" class="form-control" id="months">
+                    </div>
+                    <div class="col-md-4">
+                        <label for="formGroupExampleInput-inline">Onde?</label>
+                        <input type="text" class="form-control" id="where">
+                    </div>
+                </div>
+                <div id="question-3">
+                    <h4>Como nos conheceu?</h4>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="opcao1">
+                        <label class="form-check-label" for="inlineCheckbox1">Amigo</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="opcao2">
+                        <label class="form-check-label" for="inlineCheckbox2">Site</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="opcao3">
+                        <label class="form-check-label" for="inlineCheckbox3">Google</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" id="inlineCheckbox4" value="opcao4">
+                        <label class="form-check-label" for="inlineCheckbox4">Facebook</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" id="inlineCheckbox5" value="opcao5">
+                        <label class="form-check-label" for="inlineCheckbox5">Instagram</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="opcao6">
+                        <label class="form-check-label" for="inlineCheckbox6">Panfleto</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" id="inlineCheckbox7" value="opcao7">
+                        <label class="form-check-label" for="inlineCheckbox7">Placa na Rua</label>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="formGroupExampleInput-inline">Onde?</label>
+                        <input type="text" class="form-control" id="where">
+                    </div>
+                </div>
+                <div id="question-4">
+                    <h4>Qual resultado pretende alcançar?</h4>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="opcao1">
+                        <label class="form-check-label" for="inlineCheckbox1">Emagrecimento</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="opcao2">
+                        <label class="form-check-label" for="inlineCheckbox2">Força</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="opcao3">
+                        <label class="form-check-label" for="inlineCheckbox3">Reabilitação</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" id="inlineCheckbox4" value="opcao4">
+                        <label class="form-check-label" for="inlineCheckbox4">Definição muscular</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" id="inlineCheckbox5" value="opcao5">
+                        <label class="form-check-label" for="inlineCheckbox5">Melhorar a postura</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="opcao6">
+                        <label class="form-check-label" for="inlineCheckbox6">Flexibilidade</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" id="inlineCheckbox7" value="opcao7">
+                        <label class="form-check-label" for="inlineCheckbox7">Qualidade de vida</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" id="inlineCheckbox8" value="opcao8">
+                        <label class="form-check-label" for="inlineCheckbox8">Alívio de stress</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" id="inlineCheckbox9" value="opcao9">
+                        <label class="form-check-label" for="inlineCheckbox9">Disposição diária</label>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="formGroupExampleInput-inline">Outro</label>
+                        <input type="text" class="form-control" id="where">
+                    </div>
+                </div>
+                <div id="question-5">
+                    <h4>Você possui alguma disfunção?</h4>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="opcao1">
+                        <label class="form-check-label" for="inlineCheckbox1">Diabetes</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="opcao2">
+                        <label class="form-check-label" for="inlineCheckbox2">Doença cardíaca</label>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="formGroupExampleInput-inline">Qual doença cardíaca?</label>
+                        <input type="text" class="form-control" id="which">
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="opcao3">
+                        <label class="form-check-label" for="inlineCheckbox3">Reabilitação</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" id="inlineCheckbox4" value="opcao4">
+                        <label class="form-check-label" for="inlineCheckbox4">Definição muscular</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" id="inlineCheckbox5" value="opcao5">
+                        <label class="form-check-label" for="inlineCheckbox5">Melhorar a postura</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="opcao6">
+                        <label class="form-check-label" for="inlineCheckbox6">Flexibilidade</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" id="inlineCheckbox7" value="opcao7">
+                        <label class="form-check-label" for="inlineCheckbox7">Qualidade de vida</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" id="inlineCheckbox8" value="opcao8">
+                        <label class="form-check-label" for="inlineCheckbox8">Alívio de stress</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" id="inlineCheckbox9" value="opcao9">
+                        <label class="form-check-label" for="inlineCheckbox9">Disposição diária</label>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="formGroupExampleInput-inline">Outro</label>
+                        <input type="text" class="form-control" id="where">
+                    </div>
+                </div>
+                <div id="question-6">
+                    <h4>Em que posição trabalha?</h4>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="opcao1">
+                        <label class="form-check-label" for="inlineCheckbox1">Sentado</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="opcao2">
+                        <label class="form-check-label" for="inlineCheckbox2">Em pé</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="opcao3">
+                        <label class="form-check-label" for="inlineCheckbox3">Locomovendo-se em pé</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" id="inlineCheckbox4" value="opcao4">
+                        <label class="form-check-label" for="inlineCheckbox4">Alternando entre sentado e em pé</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" id="inlineCheckbox5" value="opcao5">
+                        <label class="form-check-label" for="inlineCheckbox5">Dirigindo</label>
+                    </div>
+                </div>
+                <div id="question-7">
+                    <div class="col-md-5">
+                        <label for="inputState" class="form-label">Por quantas horas trabalha nessa posição?</label>
+                        <select id="inputState" class="form-select">
+                            <option selected>1</option>
+                            <option selected>2</option>
+                            <option selected>3</option>
+                            <option selected>4</option>
+                            <option selected>5</option>
+                            <option selected>6</option>
+                            <option selected>7</option>
+                            <option selected>8</option>
+                            <option selected>9</option>
+                            <option selected>10</option>
+                            <option selected>Mais de 10</option>
+                            <option selected>Selecione</option>
+                        </select>
+                    </div>
+                </div>
+                <div id="question-8">
+                    <h4>Apresenta algum tipo de dor?</h4>
+                    <div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+                            <label class="form-check-label" for="flexRadioDefault1">Não</label>
+
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+                            <label class="form-check-label" for="inlineCheckbox2">Sim</label>
+                            <label for="formGroupExampleInput-inline">Onde?</label>
+                            <input type="text" class="form-control" id="where">
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="inputState" class="form-label">Qual a intensidade da dor hoje?</label>
+                        <p>(0 nenhuma dor e 10 dor insuportável)</p>
+                        <select id="inputState" class="form-select">
+                            <option selected>1</option>
+                            <option selected>2</option>
+                            <option selected>3</option>
+                            <option selected>4</option>
+                            <option selected>5</option>
+                            <option selected>6</option>
+                            <option selected>7</option>
+                            <option selected>8</option>
+                            <option selected>9</option>
+                            <option selected>10</option>
+                            <option selected>Selecione</option>
+                        </select>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="inputState" class="form-label">Qual a intensidade da dor em crise?</label>
+                        <p>(0 nenhuma dor e 10 dor insuportável)</p>
+                        <select id="inputState" class="form-select">
+                            <option selected>1</option>
+                            <option selected>2</option>
+                            <option selected>3</option>
+                            <option selected>4</option>
+                            <option selected>5</option>
+                            <option selected>6</option>
+                            <option selected>7</option>
+                            <option selected>8</option>
+                            <option selected>9</option>
+                            <option selected>10</option>
+                            <option selected>Selecione</option>
+                        </select>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="inputState" class="form-label">A quanto tempo sente dores?</label>
+                        <select id="inputState" class="form-select">
+                            <option selected>Menos de 1 mês</option>
+                            <option selected>1 a 6 meses</option>
+                            <option selected>6 meses a 1 ano</option>
+                            <option selected>Mais de 1 ano</option>
+                            <option selected>Selecione</option>
+                        </select>
+                    </div>
+                </div>
+                <div id="question-9">
+                    <h4>Em qual movimento ou posição a dor aumenta?</h4>
+                    <div class="col-md-4">
+                        <input type="text" class="form-control" id="witch">
+                    </div>
+                </div>
+                <div id="question-10">
+                    <h4>Dê uma nota para sua dor:</h4>
+                    <div class="col-md-3">
+                        <label for="inputState" class="form-label">Durante o dia</label>
+                        <p>(0 nenhuma dor e 10 dor insuportável)</p>
+                        <select id="inputState" class="form-select">
+                            <option selected>1</option>
+                            <option selected>2</option>
+                            <option selected>3</option>
+                            <option selected>4</option>
+                            <option selected>5</option>
+                            <option selected>6</option>
+                            <option selected>7</option>
+                            <option selected>8</option>
+                            <option selected>9</option>
+                            <option selected>10</option>
+                            <option selected>Selecione</option>
+                        </select>
+                        <label for="inputState" class="form-label">Durante a manhã</label>
+                        <p>(0 nenhuma dor e 10 dor insuportável)</p>
+                        <select id="inputState" class="form-select">
+                            <option selected>1</option>
+                            <option selected>2</option>
+                            <option selected>3</option>
+                            <option selected>4</option>
+                            <option selected>5</option>
+                            <option selected>6</option>
+                            <option selected>7</option>
+                            <option selected>8</option>
+                            <option selected>9</option>
+                            <option selected>10</option>
+                            <option selected>Selecione</option>
+                        </select>
+                        <label for="inputState" class="form-label">Durante a tarde</label>
+                        <p>(0 nenhuma dor e 10 dor insuportável)</p>
+                        <select id="inputState" class="form-select">
+                            <option selected>1</option>
+                            <option selected>2</option>
+                            <option selected>3</option>
+                            <option selected>4</option>
+                            <option selected>5</option>
+                            <option selected>6</option>
+                            <option selected>7</option>
+                            <option selected>8</option>
+                            <option selected>9</option>
+                            <option selected>10</option>
+                            <option selected>Selecione</option>
+                        </select>
+                        <label for="inputState" class="form-label">Durante a noite</label>
+                        <p>(0 nenhuma dor e 10 dor insuportável)</p>
+                        <select id="inputState" class="form-select">
+                            <option selected>1</option>
+                            <option selected>2</option>
+                            <option selected>3</option>
+                            <option selected>4</option>
+                            <option selected>5</option>
+                            <option selected>6</option>
+                            <option selected>7</option>
+                            <option selected>8</option>
+                            <option selected>9</option>
+                            <option selected>10</option>
+                            <option selected>Selecione</option>
+                        </select>
+                    </div>
+                </div>
+                <div id="question-10">
+                    <h4>Ja fez ou faz tratamento para dor?</h4>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="opcao1">
+                        <label class="form-check-label" for="inlineCheckbox1">Pilates</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="opcao2">
+                        <label class="form-check-label" for="inlineCheckbox2">Acupuntura</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="opcao3">
+                        <label class="form-check-label" for="inlineCheckbox3">RPG</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" id="inlineCheckbox4" value="opcao4">
+                        <label class="form-check-label" for="inlineCheckbox4">Quiropraxia/Osteopatia</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" id="inlineCheckbox5" value="opcao5">
+                        <label class="form-check-label" for="inlineCheckbox5">Fisioterapia</label>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="formGroupExampleInput-inline">Outro</label>
+                        <input type="text" class="form-control" id="where">
+                    </div>
+                </div>
+                <div id="question-11">
+                    <h4>Marque o local da sua dor</h4>
+                    <img src="../img/figuraHumano.png" class="figure-img img-fluid rounded" alt="400x300"> @*alt="" usemap="#Map" />*@
+                    @*<map name="Map" id="ap">
+                            <area onclick="janela1(evet)" alt="" title="Janela 1" href="#" shape="poly"
+                                  coords="58,138,131,116,136,56,123,44,60,43,51,60,48,94,48,120,50,136" />
+                        </map>*@
+                </div>
+                <br>
+                <div id="question-10">
+                    <h4>Possui exames de imagem?</h4>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="opcao1">
+                        <label class="form-check-label" for="inlineCheckbox1">Raio-X</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="opcao2">
+                        <label class="form-check-label" for="inlineCheckbox2">Tomografia</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="opcao3">
+                        <label class="form-check-label" for="inlineCheckbox3">Ressonância</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" id="inlineCheckbox4" value="opcao4">
+                        <label class="form-check-label" for="inlineCheckbox4">Ultrassonografia</label>
+                    </div>
+                    <div class="col-md-2">
+                        <label for="inputDate" class="form-label">Data do Exame</label>
+                        <input type="text" class="form-control" id="inputDate">
+                    </div>
+                </div>
+                <div id="question-11">
+                    <div class="form-group">
+                        <label for="exampleFormControlTextarea1">Resumo do Laudo:</label>
+                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="10"></textarea>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<h1 class="text-center">@ViewData["Title2"]</h1>
+<div class="container">
+    <div class="row">
+        <div class="two-thirds column">
+            <form class="question_box">
+                <div id="question-1">
+                    <h4>Flexibilidade</h4>
+                    <div class="col-md-2">
+                        <label for="inputState" class="form-label"></label>
+                        <select id="inputState" class="form-select">
+                            <option selected>Sem Flexibilidade</option>
+                            <option selected>Moderada</option>
+                            <option selected>Excelente</option>
+                            <option selected>Selecione</option>
+                        </select>
+                    </div>
+                </div>
+                <div id="question-2">
+                    <h4>Limitação de movimento</h4>
+                    <div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="opcao1">
+                            <label class="form-check-label" for="inlineCheckbox1">Sentar/levantar no Mat</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="opcao2">
+                            <label class="form-check-label" for="inlineCheckbox2">Não eleva a cabeça</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="opcao3">
+                            <label class="form-check-label" for="inlineCheckbox3">Não sustenta TABLE TOP</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox4" value="opcao4">
+                            <label class="form-check-label" for="inlineCheckbox4">Obesidade</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox5" value="opcao5">
+                            <label class="form-check-label" for="inlineCheckbox5">Nenhuma</label>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="col-md-2">
+                            <label for="formGroupExampleInput-inline">Articular</label>
+                            <input type="text" class="form-control" id="articulate">
+                        </div>
+                        <div class="col-md-4">
+                            <label for="formGroupExampleInput-inline">Deficiência</label>
+                            <input type="text" class="form-control" id="deficiency">
+                        </div>
+                        <div class="col-md-2">
+                            <label for="formGroupExampleInput-inline">Dor</label>
+                            <input type="text" class="form-control" id="pain">
+                        </div>
+                        <div class="col-md-4">
+                            <label for="formGroupExampleInput-inline">Outra</label>
+                            <input type="text" class="form-control" id="other">
+                        </div>
+                    </div>
+                </div>
+                <div id="question-3">
+                    <h4>Força Abdominal</h4>
+                    <div class="col-md-2">
+                        <label for="inputState" class="form-label"></label>
+                        <select id="inputState" class="form-select">
+                            <option selected>Fraco</option>
+                            <option selected>Moderada</option>
+                            <option selected>Excelente</option>
+                            <option selected>Selecione</option>
+                        </select>
+                    </div>
+                </div>
+                <div id="question-4">
+                    <h4>Consciência Corporal</h4>
+                    <div class="col-md-2">
+                        <label for="inputState" class="form-label"></label>
+                        <select id="inputState" class="form-select">
+                            <option selected>Baixa</option>
+                            <option selected>Moderada</option>
+                            <option selected>Excelente</option>
+                            <option selected>Selecione</option>
+                        </select>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<h1 class="text-center">@ViewData["Title3"]</h1>
+<div class="container">
+    <div class="row">
+        <div class="two-thirds column">
+            <form class="row g-3"></form>
+            <h4>Exame físico</h4>
+            <div class="col-md-6">
+                <label for="inputName" class="form-label">PA (mmhg)</label>
+                <input type="text" class="form-control" id="inputPA">
+            </div>
+            <div class="col-md-5">
+                <label for="inputName" class="form-label">FC (bpm)</label>
+                <input type="text" class="form-control" id="inputFC">
+            </div>
+            <div class="col-md-5">
+                <label for="inputName" class="form-label">Peso (Kg)</label>
+                <input type="text" class="form-control" id="inputWeight">
+            </div>
+            <div class="col-md-5">
+                <label for="inputName" class="form-label">Altura (cm)</label>
+                <input type="text" class="form-control" id="inputHeight">
+            </div>
+            <div class="col-md-5">
+                <label for="inputName" class="form-label">IMC</label>
+                <input type="text" class="form-control" id="inputIMC">
+            </div>
+            <div class="col-md-5">
+                <label for="inputName" class="form-label">% Gordura corporal</label>
+                <input type="text" class="form-control" id="inputGC">
+            </div>
+            <div class="col-md-5">
+                <label for="inputName" class="form-label">% Gordura viceral</label>
+                <input type="text" class="form-control" id="inputGV">
+            </div>
+            <div class="col-md-5">
+                <label for="inputName" class="form-label">Indice de água corporal</label>
+                <input type="text" class="form-control" id="inputWater">
+            </div>
+            <div class="col-md-5">
+                <label for="inputName" class="form-label">Peso muscular</label>
+                <input type="text" class="form-control" id="inputMuscleWeight">
+            </div>
+            <div class="col-md-5">
+                <label for="inputName" class="form-label">Massa óssea</label>
+                <input type="text" class="form-control" id="inputMass">
+            </div>
+            <div class="col-md-5">
+                <label for="inputName" class="form-label">Taxa de netabolismo basal</label>
+                <input type="text" class="form-control" id="inputTx">
+            </div>
+            <div class="form-group">
+                <label for="exampleFormControlTextarea1">Movimento causador da dor</label>
+                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="exampleFormControlTextarea1">Teste de mobilidade global:</label>
+                <textarea class="form-control" id="exampleFormControlTextarea1" rows="30"></textarea>
+            </div>
+        </div>
+        <div class="col-12">
+            <br>
+            <button type="submit" class="btn btn-success">Salvar</button>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+

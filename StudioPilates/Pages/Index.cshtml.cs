@@ -18,7 +18,7 @@ namespace StudioPilates.Pages
 
         private readonly StudioPilatesContext _context;
 
-        public IList<Customer> Customers;
+        public IList<Models.Customer> Customers;
 
         //public IndexModel(ILogger<IndexModel> logger, StudioPilatesContext context)
         //{

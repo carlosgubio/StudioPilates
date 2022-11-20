@@ -1,0 +1,42 @@
+﻿@page
+@model StudioPilates.Pages.Customer_plan.IndexModel
+
+@{
+    ViewData["Title"] = "Plano do Cliente";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<p>
+    <a asp-page="Create">Novo Plano Cliente</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Customer_plan[0].Id_customer)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Customer_plan[0].Id_plan)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Customer_plan) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id_customer)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id_plan)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.Id_customer_plan">Atualizar</a> |
+                <a asp-page="./Details" asp-route-id="@item.Id_customer_plan">Detalhes</a> |
+                <a asp-page="./Delete" asp-route-id="@item.Id_customer_plan">Excluir</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

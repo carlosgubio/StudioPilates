@@ -6,13 +6,6 @@ namespace StudioPilates.Models
 {
     public class Customer
     {
-        //public enum CustomerStatus
-        //{
-        //    Cadastrado,
-        //    Ativo,
-        //    Inativo
-        //}
-
         [Key]
         public int Id_customer { get; set; }
 
@@ -52,7 +45,6 @@ namespace StudioPilates.Models
 
         [Required(ErrorMessage = "O campo \"{0}\" é de preenchimento obrigatório.")]
         [Display(Name = "Status: ")]
-        //public CustomerStatus Status { get; set; }
 
         public Address Address { get; set; }
     }

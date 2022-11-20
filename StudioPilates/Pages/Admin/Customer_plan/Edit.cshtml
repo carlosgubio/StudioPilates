@@ -1,0 +1,40 @@
+﻿@page
+@model StudioPilates.Pages.Customer_plan.EditModel
+
+@{
+    ViewData["Title"] = "Atualizar";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<h4><b>Nome:</b>@Model.Customer_plan.Id_customer</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Customer_plan.Id_customer_plan" />
+            <div class="form-group">
+                <label asp-for="Customer_plan.Id_customer" class="control-label"></label>
+                <input asp-for="Customer_plan.Id_customer" class="form-control" />
+                <span asp-validation-for="Customer_plan.Id_customer" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Customer_plan.Id_plan" class="control-label"></label>
+                <input asp-for="Customer_plan.Id_plan" class="form-control" />
+                <span asp-validation-for="Customer_plan.Id_plan" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="./Index">Voltar à Listagem</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
