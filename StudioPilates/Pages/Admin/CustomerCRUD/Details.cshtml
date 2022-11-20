@@ -55,17 +55,5 @@
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
     @{await Html.RenderPartialAsync("_CustomConfirm");}
-    @{await Html.RenderPartialAsync("_ConsultaCEP");}
-    <script>
-        $(document).ready(function () {
-            $(".custom-file-input").change(function () {
-                var file = $(this).val().split("\\").pop();
-                $(this).next(".custom-file-label").html(file);
-            });
-        });
-    </script>
-
-
-
 }
 

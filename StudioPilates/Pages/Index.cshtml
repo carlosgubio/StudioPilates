@@ -4,13 +4,22 @@
     ViewData["Title"] = "Página Principal";
 }
 
-<body background="../img/LOGO-IMC-0002.jpg" bgproperties="fixed">
-    <div class="text-center">
-        <h1 class="display-4"> “Paciência e persistência são qualidades vitais no resultado final para realizar algum esforço que valha a pena.” Joseph Pilates</h1>
-        <p> Bom trabalho!</p>
-    </div>
-    <div class="col-sm-12">
-        <img src="../img/LOGO-IMC-0002.jpg" class="img-fluid" alt="LOGO-IMC">
-    </div>
+<body background="../img/LOGO-IMC-0002.jpg" style="max-height: 100%; max-width: 100%" ; bgproperties="fixed">
+    <p>
+        <font size=10 color="red" FACE='Didot'>
+            “Paciência e persistência são qualidades vitais no resultado final para realizar
+            algum esforço que valha a pena.” <font></font><i>Joseph Pilates</i>
+        </font>
+    </p>
+
+
+   
 </body>
 
+
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{await Html.RenderPartialAsync("_CustomConfirm");}
+}

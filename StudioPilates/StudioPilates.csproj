@@ -16,10 +16,13 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Content Include="img\Carlos _Gubio.jpeg" />
-	  <Content Include="img\figuraHumano.png" />
-	  <Content Include="img\LOGO-IMC-0001.jpg" />
-	  <Content Include="img\LOGO-IMC-0002.jpg" />
+	  <Content Include="wwwroot\img\Carlos _Gubio.jpeg" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <None Include="wwwroot\img\figuraHumano.png" />
+	  <None Include="wwwroot\img\LOGO-IMC-0001.jpg" />
+	  <None Include="wwwroot\img\LOGO-IMC-0002.jpg" />
 	</ItemGroup>
 
 	<ItemGroup>
