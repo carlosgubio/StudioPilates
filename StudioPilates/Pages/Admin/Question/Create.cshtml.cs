@@ -18,11 +18,13 @@ namespace StudioPilates.Pages.Question
 
         private readonly IWebHostEnvironment _webHostEnvironment;
 
+        [BindProperty]
         public Models.Customer Customer { get; set; }
+
         public string PhotoPath { get; set; }
 
         [BindProperty]
-        public Models.Question Question   { get; set; }
+        public Models.Question Question { get; set; }
 
         [BindProperty]
         [Display(Name = "Foto do Cliente")]
@@ -33,6 +35,38 @@ namespace StudioPilates.Pages.Question
             _webHostEnvironment = webHostEnvironment;
             PhotoPath = "~/Photo/sem_imagem.jpg";
         }
+        public async Task<IActionResult> OnGetAsync(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
 
+            Customer = await _context.Customers.FirstOrDefaultAsync(m => m.Id_customer == id);
+
+            if (Customer == null)
+            {
+                return NotFound();
+            }
+
+            PhotoPath = $"~/Photo/{Customer.Id_customer:D6}.jpeg";
+
+            return Page();
+        }
+
+        public async Task<IActionResult> OnPostAsync()
+        {
+            var customer = new Models.Customer();
+            customer.Address = new Address();
+
+
+            if (await TryUpdateModelAsync(customer, Customer.GetType(), nameof(Customer)))
+            {
+                _context.Customers.Add(customer);
+                await _context.SaveChangesAsync();
+                return base.RedirectToPage("./List");
+            }
+            return Page();
+        }
     }
 }

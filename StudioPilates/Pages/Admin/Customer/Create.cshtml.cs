@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.EntityFrameworkCore;
 using StudioPilates.Data;
 using StudioPilates.Models;
 using System.ComponentModel.DataAnnotations;
@@ -12,19 +13,17 @@ namespace StudioPilates.Pages.Customer
 {
     public class CreateModel : PageModel
     {
-        [BindProperty]
-        public Models.Customer Customer { get; set; }
-
         private readonly StudioPilatesContext _context;
-
-        public IActionResult OnGet()
-        {
-            return Page();
-        }
 
         private readonly IWebHostEnvironment _webHostEnvironment;
 
+        [BindProperty]
+        public Models.Customer Customer { get; set; }
+
         public string PhotoPath { get; set; }
+
+        [BindProperty]
+        public Models.Question Question { get; set; }
 
         [BindProperty]
         [Display(Name = "Foto do Cliente")]
@@ -35,22 +34,36 @@ namespace StudioPilates.Pages.Customer
             _webHostEnvironment = webHostEnvironment;
             PhotoPath = "~/Photo/sem_imagem.jpg";
         }
+        public async Task<IActionResult> OnGetAsync(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            Customer = await _context.Customers.FirstOrDefaultAsync(m => m.Id_customer == id);
+
+            if (Customer == null)
+            {
+                return NotFound();
+            }
+
+            PhotoPath = $"~/Photo/{Customer.Id_customer:D6}.jpeg";
+
+            return Page();
+        }
+
         public async Task<IActionResult> OnPostAsync()
         {
             var customer = new Models.Customer();
             customer.Address = new Address();
 
+
             if (await TryUpdateModelAsync(customer, Customer.GetType(), nameof(Customer)))
             {
                 _context.Customers.Add(customer);
                 await _context.SaveChangesAsync();
-                await AppUtils.ProcessPhotoFile(customer.Id_customer,
-                    CustomerPhoto, _webHostEnvironment);
                 return base.RedirectToPage("./List");
-            }
-            if (CustomerPhoto == null)
-            {
-                return Page();
             }
             return Page();
         }

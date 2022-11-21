@@ -48,6 +48,9 @@ namespace StudioPilates.Pages.Customer_question_response
         }
             public async Task<IActionResult> OnPostAsync()
             {
+                var customer = new Models.Customer();
+                customer.Customer_Question_Response = new Models.Customer_question_response();
+
             if (!ModelState.IsValid)
             {
                 return Page();

@@ -47,5 +47,7 @@ namespace StudioPilates.Models
         [Display(Name = "Status: ")]
 
         public Address Address { get; set; }
-    }
+
+        public Customer_question_response Customer_Question_Response{ get; set; }
+}
 }
